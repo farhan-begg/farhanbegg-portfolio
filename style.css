@@ -1,0 +1,139 @@
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "PP Neue Montreal", sans-serif;
+  background: #0d0d0d;
+  color: white;
+  overflow-x: hidden;
+}
+
+.background-image {
+  position: absolute;
+  inset: 0;
+  background: url("bg.png") center/cover no-repeat;
+  z-index: 0;
+}
+
+/* ===================== Robot ===================== */
+#robot {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 5; /* behind cards */
+}
+
+/* ===================== Section 1 ===================== */
+.section.hero {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  padding: 2rem;
+  overflow: hidden;
+}
+.scatter-text {
+  position: absolute;
+  inset: 0;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Glass cards */
+.glass-card {
+  position: absolute;
+  background: rgba(255,255,255,0.08);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  max-width: 300px;
+  opacity: 1; /* ensure visible */
+  visibility: visible;
+
+}
+
+
+/* ===================== Navbar ===================== */
+.navbar {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+.navbar.stick {
+  position: fixed;
+  top: 0;
+  bottom: auto;
+  transform: translateX(-50%);
+}
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.08);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+}
+.nav-links a:hover {
+  transform: scale(1.15);
+  background: rgba(255,255,255,0.2);
+  color: #ffcc66;
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+/* ===================== Section 2 ===================== */
+.section.horizontal {
+  overflow: hidden;
+  position: relative;
+}
+.horizontal-wrapper {
+  display: flex;
+  height: 100%;
+  width: calc(100vw * 3);
+  will-change: transform;
+}
+.panel {
+  flex: 0 0 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+/* ===================== Section 3 ===================== */
+.outro h2 { 
+  font-size: 2.5rem; 
+  margin: 0; 
+  padding: 0;
+}
+
+/* ===================== Split-text ===================== */
+.split-text {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  white-space: pre-wrap;
+}
+.split-text .char {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}

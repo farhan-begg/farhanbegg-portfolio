@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GRND Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="background-image" id="bg"></div>
+
+  <!-- Robot -->
+  <div class="spline-container" id="robot">
+    <spline-viewer url="https://prod.spline.design/9rU3oMRF19yLGMoY/scene.splinecode"></spline-viewer>
+  </div>
+
+  <!-- Section 1 -->
+  <section class="section hero">
+    <div class="scatter-text">
+      <div class="glass-card" style="top: 15%; left: 10%;">
+        <h1 class="split-text">Hey, I’m Farhan Begg.</h1>
+      </div>
+      <div class="glass-card" style="bottom: 20%; left: 5%;">
+        <p class="">Frontend & Full-Stack Developer — 5 years building modern apps.</p>
+      </div>
+      <div class="glass-card" style="top: 25%; right: 10%;">
+        <p class="">React, React Native, TypeScript, GSAP, Three.js, TailwindCSS.</p>
+      </div>
+      <div class="glass-card" style="bottom: 15%; right: 20%;">
+        <p class="">Graduated with a CS degree, passionate about 3D & AI.</p>
+      </div>
+      <div class="glass-card" style="top: 60%; left: 15%;">
+        <p class="">I want to design unforgettable digital products.</p>
+      </div>
+    </div>
+
+    <!-- Bubble Navbar -->
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="section horizontal glass" id="projects">
+    <div class="horizontal-wrapper">
+      <div class="panel glass"><h2 class="split-text">Frontend Power</h2></div>
+      <div class="panel glass"><h2 class="split-text">3D Interactivity</h2></div>
+      <div class="panel glass"><h2 class="split-text">Real UX</h2></div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="section outro glass" id="contact">
+    <div class="container">
+      <h2 class="split-text">Let’s Build Something Legendary.</h2>
+    </div>
+  </section>
+
+  <!-- Spline Loader -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
+
+  <!-- GSAP + Lenis -->
+  <script type="module">
+    import gsap from "https://esm.sh/gsap";
+    import { ScrollTrigger } from "https://esm.sh/gsap/ScrollTrigger";
+    import Lenis from "https://esm.sh/lenis";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Smooth scroll
+    const lenis = new Lenis({ duration: 1.2, smooth: true });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // Navbar sticks at top after hero
+    ScrollTrigger.create({
+      trigger: "#projects",
+      start: "top top",
+      onEnter: () => document.querySelector(".navbar").classList.add("stick"),
+      onLeaveBack: () => document.querySelector(".navbar").classList.remove("stick")
+    });
+
+    // STEP 1: Split all .split-text into characters
+    document.querySelectorAll(".split-text").forEach(el => {
+      const text = el.textContent.trim();
+      el.innerHTML = text.split("").map(l => `<span class="char">${l}</span>`).join("");
+    });
+
+    // STEP 2: Animate scattered cards + letters
+    gsap.utils.toArray(".glass-card").forEach((card, i) => {
+      const chars = card.querySelectorAll(".glass-card");
+
+      // Timeline per card
+      const tl = gsap.timeline({ delay: i * 0.5 });
+
+      // Card fade in
+      tl.from(card, {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        ease: "power3.out"
+      });
+
+      // Letters animate after card appears
+      if (chars.length) {
+        tl.from(chars, {
+          y: 30,
+          opacity: 0,
+          stagger: 0.03,
+          duration: 0.8,
+          ease: "power4.out"
+        }, "-=0.4");
+      }
+    });
+
+    // Robot idle float
+    gsap.to("#robot", {
+      y: "+=20",
+      repeat: -1,
+      yoyo: true,
+      duration: 3,
+      ease: "sine.inOut"
+    });
+
+    // Robot shrink + move on scroll
+    gsap.to("#robot", {
+      x: "30vw",
+      y: "40vh",
+      scale: 0.3,
+      scrollTrigger: {
+        trigger: ".horizontal",
+        start: "top bottom",
+        end: "top center",
+        scrub: true,
+      }
+    });
+
+    // Section 2 horizontal scroll
+    const panels = gsap.utils.toArray(".panel");
+    gsap.to(".horizontal-wrapper", {
+      xPercent: -100 * (panels.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".horizontal",
+        pin: true,
+        scrub: 1,
+        end: () => "+=" + document.querySelector(".horizontal").offsetWidth
+      }
+    });
+  </script>
+</body>
+</html>
