@@ -5,154 +5,218 @@
   <title>GRND Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family:"PP Neue Montreal",sans-serif;
+      background:#0d0d0d;
+      overflow-x:hidden;
+    }
 
+    /* ===== Robot ===== */
+    #robot {
+      position:fixed;
+      top:50%;
+      left:50%;
+      width:600px;
+      height:600px;
+      transform:translate(-50%,-50%);
+      pointer-events:none;
+      z-index:20;
+      filter:drop-shadow(0 0 40px rgba(255,255,255,0.2));
+      transition:filter .5s ease;
+    }
+
+    /* ===== Hero ===== */
+    .section.hero {
+      position:relative;
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+      padding:2rem;
+      color:white;
+      z-index:5;
+    }
+    .hero-bg-layer {
+      position:absolute;
+      inset:0;
+      background:url('bg1.jpg') center/cover no-repeat;
+      filter:blur(10px) brightness(.6);
+      transform:scale(1.1);
+      z-index:1;
+    }
+    .scatter-text {position:relative;z-index:6;height:100%;perspective:1200px;}
+    .glass-card {
+      position:absolute;
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 12px 40px rgba(0,0,0,.4);
+      max-width:500px;
+      color:white;
+      z-index:7;
+      transform-style:preserve-3d;
+      will-change:transform,opacity;
+    }
+
+    /* ===== Experience Section ===== */
+    .section.experience {
+      position:relative;
+      min-height:100vh;
+      overflow:hidden;
+    }
+    .experience-wrapper {
+      display:flex;
+      width:400vw;
+      height:100vh;
+      position:relative;
+    }
+    .panel {
+      width:100vw;
+      flex-shrink:0;
+      padding:8rem 5rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:4rem;
+      position:relative;
+      overflow:hidden;
+      transition:background 1s ease,color 1s ease;
+    }
+    .panel-content{flex:1.3;z-index:3;}
+    .company-name{font-size:3rem;font-weight:700;display:inline-block;opacity:0;position:relative;margin-bottom:1.5rem;}
+    .line{position:absolute;bottom:-6px;left:0;height:3px;width:0;background:currentColor;border-radius:2px;}
+    .company-description{font-size:1.1rem;line-height:1.8;opacity:0;transform:translateY(30px);max-width:700px;}
+    .panel-media{flex:1;display:flex;justify-content:center;align-items:center;}
+    .screenshot{width:80%;max-width:420px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);box-shadow:0 20px 60px rgba(0,0,0,.6);transform:rotate(-2deg) scale(.95);opacity:0;transition:all 1s ease;}
+    .screenshot img{width:100%;display:block;}
+
+    /* Panel colors */
+    .panel.johnson{background:#fefefe;color:#111;}
+    .panel.onward{background:linear-gradient(135deg,#ff6f3c,#ff914d);color:#fff;}
+    .panel.firstgen{background:linear-gradient(135deg,#d6cec3,#b8b1a9);color:#111;}
+    .panel.scrimmage{background:linear-gradient(135deg,#0d0d0d,#121212);color:#b7ff72;}
+
+    .progress-bar{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:60%;height:4px;background:rgba(255,255,255,.3);border-radius:2px;overflow:hidden;z-index:10;}
+    .progress-bar-fill{height:100%;width:0;background:#ffcc66;transition:width .3s ease;}
+
+    .outro h2{font-size:2.5rem;color:white;}
+    .split-text{display:inline-block;white-space:pre;}
+    .split-text .char{display:inline-block;opacity:0;transform:translateY(20px);}
+  </style>
+</head>
 <body>
-  <div class="background-image" id="bg"></div>
 
   <!-- Robot -->
-  <div class="spline-container" id="robot">
+  <div id="robot">
     <spline-viewer url="https://prod.spline.design/9rU3oMRF19yLGMoY/scene.splinecode"></spline-viewer>
   </div>
 
-  <!-- Section 1 -->
+  <!-- Hero -->
   <section class="section hero">
+    <div class="hero-bg-layer"></div>
     <div class="scatter-text">
-      <div class="glass-card" style="top: 15%; left: 10%;">
-        <h1 class="split-text">Hey, I’m Farhan Begg.</h1>
-      </div>
-      <div class="glass-card" style="bottom: 20%; left: 5%;">
-        <p class="">Frontend & Full-Stack Developer — 5 years building modern apps.</p>
-      </div>
-      <div class="glass-card" style="top: 25%; right: 10%;">
-        <p class="">React, React Native, TypeScript, GSAP, Three.js, TailwindCSS.</p>
-      </div>
-      <div class="glass-card" style="bottom: 15%; right: 20%;">
-        <p class="">Graduated with a CS degree, passionate about 3D & AI.</p>
-      </div>
-      <div class="glass-card" style="top: 60%; left: 15%;">
-        <p class="">I want to design unforgettable digital products.</p>
-      </div>
-    </div>
-
-    <!-- Bubble Navbar -->
-    <nav class="navbar">
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </section>
-
-  <!-- Section 2 -->
-  <section class="section horizontal glass" id="projects">
-    <div class="horizontal-wrapper">
-      <div class="panel glass"><h2 class="split-text">Frontend Power</h2></div>
-      <div class="panel glass"><h2 class="split-text">3D Interactivity</h2></div>
-      <div class="panel glass"><h2 class="split-text">Real UX</h2></div>
+      <div class="glass-card" style="top:15%;left:10%;"><h1 class="split-text">Hey, I’m Farhan Begg.</h1></div>
+      <div class="glass-card" style="top:45%;left:5%;"><p>Frontend & Full-Stack Developer — building immersive digital experiences with design & precision.</p></div>
+      <div class="glass-card" style="bottom:10%;right:10%;"><p>React • React Native • GSAP • Three.js • TypeScript • TailwindCSS</p></div>
     </div>
   </section>
 
-  <!-- Section 3 -->
-  <section class="section outro glass" id="contact">
-    <div class="container">
-      <h2 class="split-text">Let’s Build Something Legendary.</h2>
+  <!-- Experience -->
+  <section class="section experience" id="projects">
+    <div class="experience-wrapper" id="horizontalScroll">
+      <div class="panel johnson"><div class="panel-content"><h2 class="company-name">Johnson Health Tech<span class="line"></span></h2><p class="company-description">Remote | Jul 2023 – Jun 2025<br><br>Designed and built full-stack features for a React Native fitness platform used by 200 K+ users, increasing retention by 30 %. Implemented secure Stripe payments, integrated APIs for real-time health data, and optimized deployment pipelines on AWS & Azure for 99.9 % uptime.</p></div><div class="panel-media"><div class="screenshot"><img src="images/johnson-bg.jpg.png"></div></div></div>
+      <div class="panel onward"><div class="panel-content"><h2 class="company-name">Onward Health<span class="line"></span></h2><p class="company-description">San Leandro CA | Jan 2022 – Dec 2022<br><br>Developed clinician dashboards and real-time transportation tools using React and TypeScript. Collaborated with .NET teams, improving scheduling efficiency by 50 % and ensuring data compliance.</p></div><div class="panel-media"><div class="screenshot"><img src="./images/onward-bg.jpg.png"></div></div></div>
+      <div class="panel firstgen"><div class="panel-content"><h2 class="company-name">First Gen (NFT)<span class="line"></span></h2><p class="company-description">New York | Feb 2021 – Dec 2021<br><br>Built an interactive NFT marketplace using React and Web3.js with animated GSAP landing pages, increasing engagement and sales.</p></div><div class="panel-media"><div class="screenshot"><img src="firstgen.png"></div></div></div>
+      <div class="panel scrimmage"><div class="panel-content"><h2 class="company-name">Scrimmage<span class="line"></span></h2><p class="company-description">Seattle | Jan 2021 – Jun 2021<br><br>Developed sports betting app features using React Native & Firebase; optimized navigation & performance for real-time analytics.</p></div><div class="panel-media"><div class="screenshot"><img src="./images/scrimmage.png"></div></div></div>
     </div>
+    <div class="progress-bar"><div class="progress-bar-fill"></div></div>
   </section>
 
-  <!-- Spline Loader -->
+  <section class="section outro"><div class="container"><h2>Let’s Build Something Legendary.</h2></div></section>
+
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.76/build/spline-viewer.js"></script>
-
-  <!-- GSAP + Lenis -->
   <script type="module">
     import gsap from "https://esm.sh/gsap";
-    import { ScrollTrigger } from "https://esm.sh/gsap/ScrollTrigger";
-    import Lenis from "https://esm.sh/lenis";
+    import { ScrollTrigger, MotionPathPlugin } from "https://esm.sh/gsap/all";
+    gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
-    gsap.registerPlugin(ScrollTrigger);
+    // Floating idle motion
+    gsap.to("#robot", { y: "+=20", repeat: -1, yoyo: true, duration: 3, ease: "sine.inOut" });
 
-    // Smooth scroll
-    const lenis = new Lenis({ duration: 1.2, smooth: true });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-
-    // Navbar sticks at top after hero
-    ScrollTrigger.create({
-      trigger: "#projects",
-      start: "top top",
-      onEnter: () => document.querySelector(".navbar").classList.add("stick"),
-      onLeaveBack: () => document.querySelector(".navbar").classList.remove("stick")
-    });
-
-    // STEP 1: Split all .split-text into characters
-    document.querySelectorAll(".split-text").forEach(el => {
-      const text = el.textContent.trim();
-      el.innerHTML = text.split("").map(l => `<span class="char">${l}</span>`).join("");
-    });
-
-    // STEP 2: Animate scattered cards + letters
-    gsap.utils.toArray(".glass-card").forEach((card, i) => {
-      const chars = card.querySelectorAll(".glass-card");
-
-      // Timeline per card
-      const tl = gsap.timeline({ delay: i * 0.5 });
-
-      // Card fade in
-      tl.from(card, {
-        opacity: 0,
-        y: 60,
-        duration: 1,
-        ease: "power3.out"
-      });
-
-      // Letters animate after card appears
-      if (chars.length) {
-        tl.from(chars, {
-          y: 30,
-          opacity: 0,
-          stagger: 0.03,
-          duration: 0.8,
-          ease: "power4.out"
-        }, "-=0.4");
-      }
-    });
-
-    // Robot idle float
+    // Hero parallax glow
     gsap.to("#robot", {
-      y: "+=20",
-      repeat: -1,
-      yoyo: true,
-      duration: 3,
-      ease: "sine.inOut"
-    });
-
-    // Robot shrink + move on scroll
-    gsap.to("#robot", {
-      x: "30vw",
-      y: "40vh",
-      scale: 0.3,
-      scrollTrigger: {
-        trigger: ".horizontal",
-        start: "top bottom",
-        end: "top center",
-        scrub: true,
-      }
-    });
-
-    // Section 2 horizontal scroll
-    const panels = gsap.utils.toArray(".panel");
-    gsap.to(".horizontal-wrapper", {
-      xPercent: -100 * (panels.length - 1),
+      x: "-10vw", y: "-5vh",
+      filter: "drop-shadow(0 0 60px rgba(255,255,255,0.3))",
       ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+    });
+
+    // === SHRINK EFFECT when entering Section 2 ===
+    gsap.to("#robot", {
+      scale: 0.35,
+      y: "40vh",
+      x: "25vw",
+      filter: "drop-shadow(0 0 30px rgba(255,255,255,0.2))",
       scrollTrigger: {
-        trigger: ".horizontal",
-        pin: true,
-        scrub: 1,
-        end: () => "+=" + document.querySelector(".horizontal").offsetWidth
+        trigger: ".experience",
+        start: "top bottom",
+        end: "top top",
+        scrub: true
       }
+    });
+
+    // Split text
+    document.querySelectorAll(".split-text").forEach(el=>{
+      const txt=el.textContent.trim();
+      el.innerHTML=txt.split("").map(l=>`<span class='char'>${l}</span>`).join("");
+      gsap.to(el.querySelectorAll(".char"),{opacity:1,y:0,duration:1,stagger:.03,ease:"power3.out",delay:.4});
+    });
+
+    // Horizontal panels
+    const panels=gsap.utils.toArray(".panel");
+    const progress=document.querySelector(".progress-bar-fill");
+    const scrollTween=gsap.to(panels,{xPercent:-100*(panels.length-1),ease:"none",
+      scrollTrigger:{trigger:".experience",pin:true,scrub:1.2,snap:1/(panels.length-1),
+      end:() => "+="+(window.innerWidth*(panels.length-1)),
+      onUpdate:self=>progress.style.width=(self.progress*100)+"%"}});
+    panels.forEach(p=>{
+      const n=p.querySelector(".company-name"),l=p.querySelector(".line"),
+            d=p.querySelector(".company-description"),i=p.querySelector(".screenshot");
+      const tl=gsap.timeline({scrollTrigger:{trigger:p,containerAnimation:scrollTween,start:"left center",end:"right center",scrub:true}});
+      tl.to(n,{opacity:1,y:0,duration:1,ease:"power3.out"})
+        .to(l,{width:"100%",duration:.8,ease:"power2.out"},"<0.2")
+        .to(d,{opacity:1,y:0,duration:1,ease:"power2.out"},"<0.2")
+        .to(i,{opacity:1,scale:1,duration:1,ease:"power2.out"},"<0.3");
+    });
+
+    // Curved robot orbit across panels
+    const robotPath = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".experience",
+        containerAnimation: scrollTween,
+        scrub: 1.6,
+        start: "left center",
+        end: "right center"
+      }
+    });
+
+    robotPath.to("#robot", {
+      motionPath: {
+        path: [
+          {x: "-40vw", y: "-30vh"},
+          {x: "40vw", y: "-25vh"},
+          {x: "30vw", y: "35vh"},
+          {x: "-35vw", y: "40vh"}
+        ],
+        curviness: 1.4
+      },
+      scale: 0.4,
+      rotation: 5,
+      ease: "power2.inOut",
+      duration: 1.5
     });
   </script>
 </body>
