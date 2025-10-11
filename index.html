@@ -47,6 +47,15 @@
       will-change:transform,opacity;
     }
 
+    .hero-project-layer {
+      position:absolute;inset:0;
+      background:url('bg5.jpg') center/cover no-repeat;
+      filter:blur(10px) brightness(.6);
+      transform:scale(1.1);
+      z-index:0;
+      will-change:transform,opacity;
+    }
+
     /* Animated white border */
     .hero-border {
       position:absolute;
@@ -130,20 +139,6 @@
     .company-name{font-size:3rem;font-weight:700;display:inline-block;opacity:0;position:relative;margin-bottom:1.5rem;}
     .line{position:absolute;bottom:-6px;left:0;height:3px;width:0;background:currentColor;border-radius:2px;}
     .company-description{font-size:1.1rem;line-height:1.8;opacity:0;transform:translateY(30px);max-width:700px;}
-    .tech-stack {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:20px;
-      opacity:0;
-      transform:translateY(20px);
-    }
-    .tech-stack img {
-      width:34px;
-      height:34px;
-      object-fit:contain;
-      filter:drop-shadow(0 0 4px rgba(0,0,0,0.3));
-    }
 
     .panel-media{flex:1;display:flex;justify-content:center;align-items:center;position:relative;}
     .screenshot {
@@ -155,21 +150,78 @@
     }
     .screenshot img {width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease;}
     .screenshot.active img {transform:scale(1.1);}
+
     .panel.johnson{background:#fefefe;color:#111;}
     .panel.onward{background:linear-gradient(135deg,#ff6f3c,#ff914d);color:#fff;}
     .panel.firstgen{background:linear-gradient(135deg,#d6cec3,#b8b1a9);color:#111;}
     .panel.scrimmage{background:linear-gradient(135deg,#0d0d0d,#121212);color:#b7ff72;}
+
     .progress-bar{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:60%;height:4px;background:rgba(255,255,255,.3);border-radius:2px;overflow:hidden;z-index:10;}
     .progress-bar-fill{height:100%;width:0;background:#ffcc66;transition:width .3s ease;}
 
+    /* Tech icons for Johnson (glass bubbly) */
+ /* Glassy Spherical Tech Icons */
+.tech-icons img {
+  margin-top: 25px;
+  margin-left: 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  box-shadow: 
+    0 10px 30px rgba(255, 255, 255, 0.2), 
+    0 4px 12px rgba(0, 0, 0, 0.25), 
+    inset 0 0 15px rgba(255, 255, 255, 0.755);
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+}
+
+.tech-icons img:hover {
+  transform: scale(1.35) translateY(-10px);
+  filter: drop-shadow(0 0 30px #f0f0f0);
+  box-shadow: 
+    0 15px 40px rgba(255,255,255,0.4), 
+    0 8px 20px rgba(0, 0, 0, 0.44),
+    inset 0 0 25px rgba(255,255,255,0.5);
+}
+
+
     /* ===== Projects ===== */
-    .section.projects {
-      position:relative;
-      min-height:200vh;
-      padding:6rem 3rem;
-      background:radial-gradient(circle at 30% 30%, #1a1a1a, #0d0d0d);
-      overflow:hidden;
-    }
+ .section.projects {
+  position: relative;
+  min-height: 200vh;
+  padding: 6rem 3rem;
+  overflow: hidden;
+}
+
+/* Background layer */
+.section.projects::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('bg5.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(10px) brightness(0.6);
+  z-index: -1; /* behind the content */
+}
+
+/* Content inside the section stays normal */
+.section.projects .content {
+  position: relative;
+  z-index: 1;
+  color: white; /* example */
+}
+
+
     .projects-header{text-align:center;margin-bottom:5rem;}
     .projects-header h2{font-size:3rem;font-weight:700;color:#ffcc66;position:relative;display:inline-block;}
     .projects-header h2::after{content:"";position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);width:60%;height:3px;background:linear-gradient(90deg,#ffcc66,#ff884d);border-radius:2px;}
@@ -194,20 +246,12 @@
   <!-- HERO -->
   <section class="section hero">
     <div class="hero-bg-layer"></div>
-
-    <div class="hero-border">
-      <div class="top"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="left"></div>
-    </div>
-
+    <div class="hero-border"><div class="top"></div><div class="right"></div><div class="bottom"></div><div class="left"></div></div>
     <div class="hero-side-text">
       <span>Creative</span>
       <span>Designer</span>
       <span>Developer</span>
     </div>
-
     <div class="scatter-text">
       <div class="glass-card" style="top:15%;left:10%;"><h1>Hey, I’m Farhan Begg.</h1></div>
       <div class="glass-card" style="top:45%;left:5%;"><p>Frontend & Full-Stack Developer — building immersive digital experiences with design & precision.</p></div>
@@ -223,15 +267,20 @@
       <div class="panel johnson">
         <div class="panel-content">
           <h2 class="company-name">Johnson Health Tech<span class="line"></span></h2>
-          <p class="company-description">Remote | Jul 2023 – Jun 2025<br><br>Built a global fitness platform that integrates real-time workout tracking, streaming classes, and device synchronization. Led frontend architecture using React and TypeScript to deliver high-performance dashboards for thousands of users.</p>
-          <div class="tech-stack">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg">
+          <p class="company-description">
+            Remote | Jul 2023 – Jun 2025<br><br>
+            Built a global fitness platform that integrates real-time workout tracking, streaming classes, and device synchronization. Led frontend architecture using React and TypeScript to deliver high-performance dashboards for thousands of users.
+          </p>
+          <!-- Glassy Bubbly Tech Icons -->
+          <div class="tech-icons">
+            <img src="https://img.icons8.com/color/48/react-native.png" alt="React" />
+            <img src="https://img.icons8.com/color/48/javascript.png" alt="JavaScript" />
+            <img src="https://img.icons8.com/color/48/nodejs.png" alt="Node.js" />
+            <img src="https://img.icons8.com/color/48/express-js.png" alt="Express" />
+            <img src="https://img.icons8.com/color/48/sql.png" alt="SQL" />
           </div>
         </div>
-        <div class="panel-media"><div class="screenshot"><img src="https://picsum.photos/600/400?random=1"></div></div>
+        <div class="panel-media"><div class="screenshot"><img src='./images/johnson-bg.jpg.png' alt="Johnson Health Tech" /></div></div>
       </div>
 
       <!-- Onward Health -->
@@ -240,13 +289,10 @@
           <h2 class="company-name">Onward Health<span class="line"></span></h2>
           <p class="company-description">Developed clinician dashboards and radiology AI interfaces improving patient workflow efficiency by 45%. Built real-time analytics and DICOM imaging UI in React and Python Flask.</p>
           <div class="tech-stack">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg">
+      
           </div>
         </div>
-        <div class="panel-media"><div class="screenshot"><img src="https://picsum.photos/600/400?random=2"></div></div>
+        <div class="panel-media"><div class="screenshot"><img src="./images/onward-bg.jpg.png"></div></div>
       </div>
 
       <!-- First Gen -->
@@ -254,14 +300,9 @@
         <div class="panel-content">
           <h2 class="company-name">First Gen (NFT)<span class="line"></span></h2>
           <p class="company-description">Built NFT marketplace smart contract integrations, wallet authentication, and 3D gallery views. Created seamless minting and auction flow with custom UI animations.</p>
-          <div class="tech-stack">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ethereum/ethereum-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg">
-          </div>
+ 
         </div>
-        <div class="panel-media"><div class="screenshot"><img src="https://picsum.photos/600/400?random=3"></div></div>
+        <div class="panel-media"><div class="screenshot"><img src="./firstgen.jpg"></div></div>
       </div>
 
       <!-- Scrimmage -->
@@ -269,12 +310,7 @@
         <div class="panel-content">
           <h2 class="company-name">Scrimmage<span class="line"></span></h2>
           <p class="company-description">Sports betting app with real-time odds, leaderboard gamification, and performance charts. Implemented full-stack data syncing with Firebase and GSAP-driven interactions.</p>
-          <div class="tech-stack">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gsap/gsap-plain.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
-          </div>
+      
         </div>
         <div class="panel-media"><div class="screenshot"><img src="https://picsum.photos/600/400?random=4"></div></div>
       </div>
@@ -283,33 +319,43 @@
     <div class="progress-bar"><div class="progress-bar-fill"></div></div>
   </section>
 
+  <!-- Projects Section -->
+<section class="section projects" id="projects-showcase">
+  <!-- Foreground wallpaper -->
+  <div class="projects-parallax-layer"></div>
 
-  <!-- Projects -->
-  <section class="section projects" id="projects-showcase">
-    <div class="projects-header"><h2>Selected Projects</h2></div>
-    <div class="projects-grid">
-      <div class="project-card" data-depth="0.1"><img src="https://picsum.photos/600/400?random=5"><div class="project-content"><h3>Neon Studio</h3><p>Immersive React + GSAP portfolio with glowing motion layers.</p></div></div>
-      <div class="project-card" data-depth="0.3"><img src="https://picsum.photos/600/400?random=6"><div class="project-content"><h3>Solar Dashboard</h3><p>Real-time renewable energy analytics platform with Node.js.</p></div></div>
-      <div class="project-card" data-depth="0.2"><img src="https://picsum.photos/600/400?random=7"><div class="project-content"><h3>MetaCommerce</h3><p>3D ecommerce prototype built in Three.js with product orbiting.</p></div></div>
-      <div class="project-card" data-depth="0.4"><img src="https://picsum.photos/600/400?random=8"><div class="project-content"><h3>AI Designer</h3><p>AI-powered image generation tool with creative UI workflows.</p></div></div>
-    </div>
-  </section>
+  <div class="projects-header"><h2>Selected Projects</h2></div>
+  <div class="projects-grid">
+    <div class="project-card" data-depth="0.1"><img src="https://picsum.photos/600/400?random=5"><div class="project-content"><h3>Neon Studio</h3><p>Immersive React + GSAP portfolio with glowing motion layers.</p></div></div>
+    <div class="project-card" data-depth="0.3"><img src="https://picsum.photos/600/400?random=6"><div class="project-content"><h3>Solar Dashboard</h3><p>Real-time renewable energy analytics platform with Node.js.</p></div></div>
+    <div class="project-card" data-depth="0.2"><img src="https://picsum.photos/600/400?random=7"><div class="project-content"><h3>MetaCommerce</h3><p>3D ecommerce prototype built in Three.js with product orbiting.</p></div></div>
+    <div class="project-card" data-depth="0.4"><img src="https://picsum.photos/600/400?random=8"><div class="project-content"><h3>AI Designer</h3><p>AI-powered image generation tool with creative UI workflows.</p></div></div>
+  </div>
+</section>
+
 
   <section class="section outro"><div class="container"><h2>Let’s Build Something Legendary.</h2></div></section>
 
-  <!-- Spline Viewer Script (required for robot) -->
   <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
-
-  <!-- GSAP Animations -->
   <script type="module">
     import gsap from "https://esm.sh/gsap";
     import { ScrollTrigger } from "https://esm.sh/gsap/all";
     gsap.registerPlugin(ScrollTrigger);
 
-    // Floating robot idle
     gsap.to("#robot",{y:"+=20",repeat:-1,yoyo:true,duration:3,ease:"sine.inOut"});
 
-    // Animate border draw
+    // Bubbly floating tech icons
+    gsap.utils.toArray(".tech-icons img").forEach((icon, i) => {
+      gsap.to(icon, {
+        y: "+=10",
+        repeat: -1,
+        yoyo: true,
+        duration: 2 + i * 0.2,
+        ease: "sine.inOut",
+      });
+    });
+
+    // Hero border draw
     const borderTL = gsap.timeline({delay:0.4});
     borderTL
       .to(".hero-border .top",{width:"100%",duration:0.6,ease:"power2.out"})
@@ -317,7 +363,7 @@
       .to(".hero-border .bottom",{width:"100%",duration:0.6,ease:"power2.out"},"<0.1")
       .to(".hero-border .left",{height:"100%",duration:0.6,ease:"power2.out"},"<0.1");
 
-    // Background parallax + fade
+    // Hero BG Parallax
     gsap.to(".hero-bg-layer", {
       scale: 1.2,
       y: "-10vh",
@@ -331,47 +377,21 @@
       }
     });
 
-    // Parallax Side Text
     gsap.utils.toArray(".hero-side-text span").forEach((el,i)=>{
-      gsap.to(el,{
-        yPercent:-30-(i*10),
-        ease:"none",
-        scrollTrigger:{
-          trigger:".hero",
-          start:"top top",
-          end:"bottom top",
-          scrub:true
-        }
-      });
+      gsap.to(el,{yPercent:-30-(i*10),ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
     });
 
-    // Parallax hero cards
     gsap.utils.toArray(".glass-card").forEach((card,i)=>{
-      gsap.from(card,{
-        opacity:0,y:60,scale:0.95,duration:1,delay:i*0.2,ease:"power3.out"
-      });
-      gsap.to(card,{
-        yPercent:-10-(i*5),
-        opacity:1,
-        ease:"none",
-        scrollTrigger:{
-          trigger:".hero",
-          start:"top top",
-          end:"bottom top",
-          scrub:true
-        }
-      });
+      gsap.from(card,{opacity:0,y:60,scale:0.95,duration:1,delay:i*0.2,ease:"power3.out"});
+      gsap.to(card,{yPercent:-10-(i*5),opacity:1,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
     });
 
-    // Robot shrink + move bottom-right
     gsap.to("#robot",{scale:0.35,x:"45vw",y:"60vh",scrollTrigger:{trigger:".experience",start:"top bottom",end:"top top",scrub:true}});
 
-    // Horizontal scroll
     const panels=gsap.utils.toArray(".panel");
     const progress=document.querySelector(".progress-bar-fill");
     const scrollTween=gsap.to(panels,{xPercent:-100*(panels.length-1),ease:"none",
       scrollTrigger:{trigger:".experience",pin:true,scrub:1.2,end:() => "+="+(window.innerWidth*(panels.length-1)),onUpdate:self=>progress.style.width=(self.progress*100)+"%"}});
-
     panels.forEach(p=>{
       const n=p.querySelector(".company-name"),l=p.querySelector(".line"),d=p.querySelector(".company-description"),i=p.querySelector(".screenshot");
       const tl=gsap.timeline({scrollTrigger:{trigger:p,containerAnimation:scrollTween,start:"left center",end:"right center",scrub:true}});
@@ -381,26 +401,29 @@
         .to(i,{opacity:1,scale:1.05,duration:1.2},"<0.3");
     });
 
-    // Robot glow on Projects
+      gsap.to("#robot",{y:"+=20",repeat:-1,yoyo:true,duration:3,ease:"sine.inOut"});
+    gsap.utils.toArray(".tech-icons img").forEach((icon, i) => {
+      gsap.to(icon, {y: "+=10", repeat: -1, yoyo: true, duration: 2 + i * 0.2, ease: "sine.inOut"});
+    });
+
+
+    borderTL.to(".hero-border .top",{width:"100%",duration:0.6,ease:"power2.out"})
+      .to(".hero-border .right",{height:"100%",duration:0.6,ease:"power2.out"},"<0.1")
+      .to(".hero-border .bottom",{width:"100%",duration:0.6,ease:"power2.out"},"<0.1")
+      .to(".hero-border .left",{height:"100%",duration:0.6,ease:"power2.out"},"<0.1");
+
+    gsap.to("#robot",{scale:0.35,x:"45vw",y:"60vh",scrollTrigger:{trigger:".experience",start:"top bottom",end:"top top",scrub:true}});
+
     gsap.to("#robot",{scale:0.4,filter:"drop-shadow(0 0 60px rgba(255,255,200,0.7))",
       scrollTrigger:{trigger:"#projects-showcase",start:"top bottom",end:"top center",scrub:true}});
 
-    // Parallax projects
     gsap.utils.toArray(".project-card").forEach(card=>{
       const depth = card.dataset.depth;
-      gsap.to(card,{
-        y:() => -200 * depth + "px",
-        opacity:1,
-        scale:1,
-        ease:"none",
-        scrollTrigger:{
-          trigger:card,
-          start:"top bottom",
-          end:"top top",
-          scrub:true
-        }
-      });
+      gsap.to(card,{y:() => -200 * depth + "px",opacity:1,scale:1,ease:"none",scrollTrigger:{trigger:card,start:"top bottom",end:"top top",scrub:true}});
     });
+
+
+    
   </script>
 </body>
 </html>
