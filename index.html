@@ -1,429 +1,842 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>GRND Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet" />
-  <style>
-    * {margin:0;padding:0;box-sizing:border-box;}
-    body {
-      font-family:"PP Neue Montreal",sans-serif;
-      background:#0d0d0d;
-      color:white;
-      overflow-x:hidden;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <title>GRND Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.cdnfonts.com/css/pp-neue-montreal"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "PP Neue Montreal", sans-serif;
+        background: #0d0d0d;
+        color: white;
+        overflow-x: hidden;
+      }
 
-    /* ===== Robot ===== */
-    #robot {
-      position:fixed;
-      top:50%;
-      left:50%;
-      width:600px;
-      height:600px;
-      transform:translate(-50%,-50%);
-      pointer-events:none;
-      z-index:999999;
-      filter:drop-shadow(0 0 40px rgba(255,255,255,0.2));
-      transition:filter .5s ease;
-    }
+      /* ===== Robot ===== */
+      #robot {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 600px;
+        height: 600px;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 999999;
+        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
+        transition: filter 0.5s ease;
+      }
 
-    /* ===== HERO SECTION ===== */
-    .section.hero {
-      position:relative;
-      width:100vw;
-      height:100vh;
-      overflow:hidden;
-      padding:2rem;
-      color:white;
-      z-index:0;
-    }
-    .hero-bg-layer {
-      position:absolute;inset:0;
-      background:url('bg1.jpg') center/cover no-repeat;
-      filter:blur(10px) brightness(.6);
-      transform:scale(1.1);
-      z-index:0;
-      will-change:transform,opacity;
-    }
+      /* ===== HERO SECTION ===== */
+      .section.hero {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        padding: 2rem;
+        color: white;
+        z-index: 0;
+      }
+      .hero-bg-layer {
+        position: absolute;
+        inset: 0;
+        background: url("bg1.jpg") center/cover no-repeat;
+        filter: blur(10px) brightness(0.6);
+        transform: scale(1.1);
+        z-index: 0;
+        will-change: transform, opacity;
+      }
 
-    .hero-project-layer {
-      position:absolute;inset:0;
-      background:url('bg5.jpg') center/cover no-repeat;
-      filter:blur(10px) brightness(.6);
-      transform:scale(1.1);
-      z-index:0;
-      will-change:transform,opacity;
-    }
+      .hero-project-layer {
+        position: absolute;
+        inset: 0;
+        background: url("bg5.jpg") center/cover no-repeat;
+        filter: blur(10px) brightness(0.6);
+        transform: scale(1.1);
+        z-index: 0;
+        will-change: transform, opacity;
+      }
 
-    /* Animated white border */
-    .hero-border {
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
-      margin: 50px;
-    }
-    .hero-border div {
-      position:absolute;
-      background:white;
-      opacity:0.5;
-      box-shadow:0 0 10px rgba(255,255,255,0.4);
-    }
-    .hero-border .top,
-    .hero-border .bottom {
-      height:2px;
-      width:0;
-      left:0;
-    }
-    .hero-border .left,
-    .hero-border .right {
-      width:2px;
-      height:0;
-      top:0;
-    }
-    .hero-border .top {top:0;}
-    .hero-border .bottom {bottom:0;}
-    .hero-border .left {left:0;}
-    .hero-border .right {right:0;}
+      /* Animated white border */
+      .hero-border {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        margin: 50px;
+      }
+      .hero-border div {
+        position: absolute;
+        background: white;
+        opacity: 0.5;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      }
+      .hero-border .top,
+      .hero-border .bottom {
+        height: 2px;
+        width: 0;
+        left: 0;
+      }
+      .hero-border .left,
+      .hero-border .right {
+        width: 2px;
+        height: 0;
+        top: 0;
+      }
+      .hero-border .top {
+        top: 0;
+      }
+      .hero-border .bottom {
+        bottom: 0;
+      }
+      .hero-border .left {
+        left: 0;
+      }
+      .hero-border .right {
+        right: 0;
+      }
 
-    /* Large Side Text */
-    .hero-side-text {
-      position:absolute;
-      top:0;
-      left:3%;
-      height:100%;
-      font-size:8vw;
-      font-weight:800;
-      line-height:0.9;
-      letter-spacing:-2px;
-      color:rgba(255,255,255,0.06);
-      text-transform:uppercase;
-      z-index:2;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      text-align:left;
-      pointer-events:none;
-      mix-blend-mode:overlay;
-    }
-    .hero-side-text span:nth-child(2) { color: rgba(255,204,102,0.15); }
-    .hero-side-text span:nth-child(3) { color: rgba(255,255,255,0.08); }
+      /* Large Side Text */
+      .hero-side-text {
+        position: absolute;
+        top: 0;
+        left: 3%;
+        height: 100%;
+        font-size: 8vw;
+        font-weight: 800;
+        line-height: 0.9;
+        letter-spacing: -2px;
+        color: rgba(255, 255, 255, 0.06);
+        text-transform: uppercase;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+      }
+      .hero-side-text span:nth-child(2) {
+        color: rgba(255, 204, 102, 0.15);
+      }
+      .hero-side-text span:nth-child(3) {
+        color: rgba(255, 255, 255, 0.08);
+      }
 
-    .scatter-text {position:relative;z-index:6;height:100%;perspective:1200px;}
-    .glass-card {
-      position:absolute;
-      background:rgba(255,255,255,.08);
-      backdrop-filter:blur(20px);
-      border:1px solid rgba(255,255,255,.2);
-      border-radius:20px;
-      padding:20px;
-      box-shadow:0 12px 40px rgba(0,0,0,.4);
-      max-width:500px;
-      color:white;
-      z-index:7;
-    }
+      .scatter-text {
+        position: relative;
+        z-index: 6;
+        height: 100%;
+        perspective: 1200px;
+      }
+      .glass-card {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        max-width: 500px;
+        color: white;
+        z-index: 7;
+      }
 
-    /* ===== Experience ===== */
-    .section.experience {position:relative;min-height:100vh;overflow:hidden;}
-    .experience-wrapper {display:flex;width:400vw;height:100vh;position:relative;}
-    .panel {
-      width:100vw;flex-shrink:0;
-      padding:8rem 5rem;
-      display:flex;justify-content:space-between;align-items:center;
-      gap:6rem;
-      position:relative;overflow:hidden;
-      transition:background 1s ease,color 1s ease;
-    }
-    .panel-content{flex:1;z-index:3;}
-    .company-name{font-size:3rem;font-weight:700;display:inline-block;opacity:0;position:relative;margin-bottom:1.5rem;}
-    .line{position:absolute;bottom:-6px;left:0;height:3px;width:0;background:currentColor;border-radius:2px;}
-    .company-description{font-size:1.1rem;line-height:1.8;opacity:0;transform:translateY(30px);max-width:700px;}
+      /* ===== Experience ===== */
+      .section.experience {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+      .experience-wrapper {
+        display: flex;
+        width: 400vw;
+        height: 100vh;
+        position: relative;
+      }
+      .panel {
+        width: 100vw;
+        flex-shrink: 0;
+        padding: 8rem 5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6rem;
+        position: relative;
+        overflow: hidden;
+        transition: background 1s ease, color 1s ease;
+      }
+      .panel-content {
+        flex: 1;
+        z-index: 3;
+      }
+      .company-name {
+        font-size: 3rem;
+        font-weight: 700;
+        display: inline-block;
+        opacity: 0;
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .line {
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        height: 3px;
+        width: 0;
+        background: currentColor;
+        border-radius: 2px;
+      }
+      .company-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        opacity: 0;
+        transform: translateY(30px);
+        max-width: 700px;
+      }
 
-    .panel-media{flex:1;display:flex;justify-content:center;align-items:center;position:relative;}
-    .screenshot {
-      position:relative;width:100%;max-width:550px;aspect-ratio:16/10;
-      border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);
-      backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);
-      box-shadow:0 20px 60px rgba(0,0,0,.6);opacity:0;transform:scale(0.9);
-      transition:all 1s ease;
-    }
-    .screenshot img {width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease;}
-    .screenshot.active img {transform:scale(1.1);}
+      .panel-media {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+      .screenshot {
+        position: relative;
+        width: 100%;
+        max-width: 550px;
+        aspect-ratio: 16/10;
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 1s ease;
+      }
+      .screenshot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s ease;
+      }
+      .screenshot.active img {
+        transform: scale(1.1);
+      }
 
-    .panel.johnson{background:#fefefe;color:#111;}
-    .panel.onward{background:linear-gradient(135deg,#ff6f3c,#ff914d);color:#fff;}
-    .panel.firstgen{background:linear-gradient(135deg,#d6cec3,#b8b1a9);color:#111;}
-    .panel.scrimmage{background:linear-gradient(135deg,#0d0d0d,#121212);color:#b7ff72;}
+      .panel.johnson {
+        background: #fefefe;
+        color: #111;
+      }
+      .panel.onward {
+        background: linear-gradient(135deg, #ff6f3c, #ff914d);
+        color: #fff;
+      }
+      .panel.firstgen {
+        background: linear-gradient(135deg, #d6cec3, #b8b1a9);
+        color: #111;
+      }
+      .panel.scrimmage {
+        background: linear-gradient(135deg, #0d0d0d, #121212);
+        color: #b7ff72;
+      }
 
-    .progress-bar{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:60%;height:4px;background:rgba(255,255,255,.3);border-radius:2px;overflow:hidden;z-index:10;}
-    .progress-bar-fill{height:100%;width:0;background:#ffcc66;transition:width .3s ease;}
+      .progress-bar {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+        overflow: hidden;
+        z-index: 10;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        width: 0;
+        background: #ffcc66;
+        transition: width 0.3s ease;
+      }
 
-    /* Tech icons for Johnson (glass bubbly) */
- /* Glassy Spherical Tech Icons */
-.tech-icons img {
-  margin-top: 25px;
-  margin-left: 10px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px;
-  box-shadow: 
-    0 10px 30px rgba(255, 255, 255, 0.2), 
-    0 4px 12px rgba(0, 0, 0, 0.25), 
-    inset 0 0 15px rgba(255, 255, 255, 0.755);
-  cursor: pointer;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
-  filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
-}
+      /* Tech icons for Johnson (glass bubbly) */
+      .tech-icons img {
+        margin-top: 25px;
+        margin-left: 10px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(25px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 12px;
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2),
+          0 4px 12px rgba(0, 0, 0, 0.25),
+          inset 0 0 15px rgba(255, 255, 255, 0.755);
+        cursor: pointer;
+        transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+      }
 
-.tech-icons img:hover {
-  transform: scale(1.35) translateY(-10px);
-  filter: drop-shadow(0 0 30px #f0f0f0);
-  box-shadow: 
-    0 15px 40px rgba(255,255,255,0.4), 
-    0 8px 20px rgba(0, 0, 0, 0.44),
-    inset 0 0 25px rgba(255,255,255,0.5);
-}
+      .tech-icons img:hover {
+        transform: scale(1.35) translateY(-10px);
+        filter: drop-shadow(0 0 30px #f0f0f0);
+        box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4),
+          0 8px 20px rgba(0, 0, 0, 0.44),
+          inset 0 0 25px rgba(255, 255, 255, 0.5);
+      }
 
+      /* ===== Projects ===== */
+      .section.projects {
+        position: relative;
+        min-height: 200vh;
+        padding: 6rem 3rem;
+        overflow: hidden;
+      }
 
-    /* ===== Projects ===== */
- .section.projects {
-  position: relative;
-  min-height: 200vh;
-  padding: 6rem 3rem;
-  overflow: hidden;
-}
+      /* Background layer */
+      .section.projects::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("bg5.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: blur(10px) brightness(0.6);
+        z-index: -1; /* behind the content */
+      }
 
-/* Background layer */
-.section.projects::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('bg5.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: blur(10px) brightness(0.6);
-  z-index: -1; /* behind the content */
-}
+      /* Content inside the section stays normal */
+      .section.projects .content {
+        position: relative;
+        z-index: 1;
+        color: white; /* example */
+      }
 
-/* Content inside the section stays normal */
-.section.projects .content {
-  position: relative;
-  z-index: 1;
-  color: white; /* example */
-}
-
-
-    .projects-header{text-align:center;margin-bottom:5rem;}
-    .projects-header h2{font-size:3rem;font-weight:700;color:#ffcc66;position:relative;display:inline-block;}
-    .projects-header h2::after{content:"";position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);width:60%;height:3px;background:linear-gradient(90deg,#ffcc66,#ff884d);border-radius:2px;}
-    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:3rem;perspective:1200px;}
-    .project-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:20px;overflow:hidden;backdrop-filter:blur(15px);transition:transform .4s ease,box-shadow .4s ease;box-shadow:0 10px 30px rgba(0,0,0,0.4);transform:translateY(40px) scale(0.95);opacity:0;will-change:transform;}
-    .project-card img{width:100%;height:220px;object-fit:cover;transition:transform 2s ease;}
-    .project-card:hover img{transform:scale(1.1);}
-    .project-card:hover{transform:translateY(-20px) rotateY(8deg) rotateX(5deg) scale(1.03);box-shadow:0 25px 60px rgba(255,204,102,0.3);}
-    .project-content{padding:1.5rem;}
-    .project-content h3{margin-bottom:0.5rem;color:#ffcc66;font-size:1.4rem;}
-    .project-content p{color:#ccc;font-size:0.95rem;line-height:1.5;}
-    .outro h2{font-size:2.5rem;color:white;text-align:center;margin:6rem 0;}
-  </style>
-</head>
-<body>
-
-  <!-- Robot -->
-  <div id="robot">
-    <spline-viewer url="https://prod.spline.design/9rU3oMRF19yLGMoY/scene.splinecode"></spline-viewer>
-  </div>
-
-  <!-- HERO -->
-  <section class="section hero">
-    <div class="hero-bg-layer"></div>
-    <div class="hero-border"><div class="top"></div><div class="right"></div><div class="bottom"></div><div class="left"></div></div>
-    <div class="hero-side-text">
-      <span>Creative</span>
-      <span>Designer</span>
-      <span>Developer</span>
+      .projects-header {
+        text-align: center;
+        margin-bottom: 5rem;
+      }
+      .projects-header h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ffcc66;
+        position: relative;
+        display: inline-block;
+      }
+      .projects-header h2::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 3px;
+        background: linear-gradient(90deg, #ffcc66, #ff884d);
+        border-radius: 2px;
+      }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 3rem;
+        perspective: 1200px;
+      }
+      .project-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        overflow: hidden;
+        backdrop-filter: blur(15px);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        transform: translateY(40px) scale(0.95);
+        opacity: 0;
+        will-change: transform;
+      }
+      .project-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform 2s ease;
+      }
+      .project-card:hover img {
+        transform: scale(1.1);
+      }
+      .project-card:hover {
+        transform: translateY(-20px) rotateY(8deg) rotateX(5deg) scale(1.03);
+        box-shadow: 0 25px 60px rgba(255, 204, 102, 0.3);
+      }
+      .project-content {
+        padding: 1.5rem;
+      }
+      .project-content h3 {
+        margin-bottom: 0.5rem;
+        color: #ffcc66;
+        font-size: 1.4rem;
+      }
+      .project-content p {
+        color: #ccc;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .outro h2 {
+        font-size: 2.5rem;
+        color: white;
+        text-align: center;
+        margin: 6rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Robot -->
+    <div id="robot">
+      <spline-viewer
+        url="https://prod.spline.design/9rU3oMRF19yLGMoY/scene.splinecode"
+      ></spline-viewer>
     </div>
-    <div class="scatter-text">
-      <div class="glass-card" style="top:15%;left:10%;"><h1>Hey, I’m Farhan Begg.</h1></div>
-      <div class="glass-card" style="top:45%;left:5%;"><p>Frontend & Full-Stack Developer — building immersive digital experiences with design & precision.</p></div>
-      <div class="glass-card" style="bottom:10%;right:10%;"><p>React • React Native • GSAP • Three.js • TypeScript • TailwindCSS</p></div>
-    </div>
-  </section>
 
-  <!-- Experience -->
-  <section class="section experience" id="experience">
-    <div class="experience-wrapper" id="horizontalScroll">
-
-      <!-- Johnson Health Tech -->
-      <div class="panel johnson">
-        <div class="panel-content">
-          <h2 class="company-name">Johnson Health Tech<span class="line"></span></h2>
-          <p class="company-description">
-            Remote | Jul 2023 – Jun 2025<br><br>
-            Built a global fitness platform that integrates real-time workout tracking, streaming classes, and device synchronization. Led frontend architecture using React and TypeScript to deliver high-performance dashboards for thousands of users.
+    <!-- HERO -->
+    <section class="section hero">
+      <div class="hero-bg-layer"></div>
+      <div class="hero-border">
+        <div class="top"></div>
+        <div class="right"></div>
+        <div class="bottom"></div>
+        <div class="left"></div>
+      </div>
+      <div class="hero-side-text">
+        <span>Creative</span>
+        <span>Designer</span>
+        <span>Developer</span>
+      </div>
+      <div class="scatter-text">
+        <div class="glass-card" style="top: 15%; left: 10%">
+          <h1>Hey, I’m Farhan Begg.</h1>
+        </div>
+        <div class="glass-card" style="top: 45%; left: 5%">
+          <p>
+            Frontend & Full-Stack Developer — building immersive digital
+            experiences with design & precision.
           </p>
-          <!-- Glassy Bubbly Tech Icons -->
-          <div class="tech-icons">
-            <img src="https://img.icons8.com/color/48/react-native.png" alt="React" />
-            <img src="https://img.icons8.com/color/48/javascript.png" alt="JavaScript" />
-            <img src="https://img.icons8.com/color/48/nodejs.png" alt="Node.js" />
-            <img src="https://img.icons8.com/color/48/express-js.png" alt="Express" />
-            <img src="https://img.icons8.com/color/48/sql.png" alt="SQL" />
+        </div>
+        <div class="glass-card" style="bottom: 10%; right: 10%">
+          <p>
+            React • React Native • GSAP • Three.js • TypeScript • TailwindCSS
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section experience" id="experience">
+      <div class="experience-wrapper" id="horizontalScroll">
+        <!-- Johnson Health Tech -->
+        <div class="panel johnson">
+          <div class="panel-content">
+            <h2 class="company-name">
+              Johnson Health Tech<span class="line"></span>
+            </h2>
+            <p class="company-description">
+              Remote | Jul 2023 – Jun 2025<br /><br />
+              Built a global fitness platform that integrates real-time workout
+              tracking, streaming classes, and device synchronization. Led
+              frontend architecture using React and TypeScript to deliver
+              high-performance dashboards for thousands of users.
+            </p>
+            <!-- Glassy Bubbly Tech Icons -->
+            <div class="tech-icons">
+              <img
+                src="https://img.icons8.com/color/48/react-native.png"
+                alt="React"
+              />
+              <img
+                src="https://img.icons8.com/color/48/javascript.png"
+                alt="JavaScript"
+              />
+              <img
+                src="https://img.icons8.com/color/48/nodejs.png"
+                alt="Node.js"
+              />
+              <img
+                src="https://img.icons8.com/color/48/express-js.png"
+                alt="Express"
+              />
+              <img src="https://img.icons8.com/color/48/sql.png" alt="SQL" />
+            </div>
+          </div>
+          <div class="panel-media">
+            <div class="screenshot">
+              <img
+                src="./images/johnson-bg.jpg.png"
+                alt="Johnson Health Tech"
+              />
+            </div>
           </div>
         </div>
-        <div class="panel-media"><div class="screenshot"><img src='./images/johnson-bg.jpg.png' alt="Johnson Health Tech" /></div></div>
-      </div>
 
-      <!-- Onward Health -->
-      <div class="panel onward">
-        <div class="panel-content">
-          <h2 class="company-name">Onward Health<span class="line"></span></h2>
-          <p class="company-description">Developed clinician dashboards and radiology AI interfaces improving patient workflow efficiency by 45%. Built real-time analytics and DICOM imaging UI in React and Python Flask.</p>
-          <div class="tech-stack">
-      
+        <!-- Onward Health -->
+        <div class="panel onward">
+          <div class="panel-content">
+            <h2 class="company-name">
+              Onward Health<span class="line"></span>
+            </h2>
+            <p class="company-description">
+              Developed clinician dashboards and radiology AI interfaces
+              improving patient workflow efficiency by 45%. Built real-time
+              analytics and DICOM imaging UI in React and Python Flask.
+            </p>
+          </div>
+          <div class="panel-media">
+            <div class="screenshot">
+              <img src="./images/onward-bg.jpg.png" />
+            </div>
           </div>
         </div>
-        <div class="panel-media"><div class="screenshot"><img src="./images/onward-bg.jpg.png"></div></div>
-      </div>
 
-      <!-- First Gen -->
-      <div class="panel firstgen">
-        <div class="panel-content">
-          <h2 class="company-name">First Gen (NFT)<span class="line"></span></h2>
-          <p class="company-description">Built NFT marketplace smart contract integrations, wallet authentication, and 3D gallery views. Created seamless minting and auction flow with custom UI animations.</p>
- 
+        <!-- First Gen -->
+        <div class="panel firstgen">
+          <div class="panel-content">
+            <h2 class="company-name">
+              First Gen (NFT)<span class="line"></span>
+            </h2>
+            <p class="company-description">
+              Built NFT marketplace smart contract integrations, wallet
+              authentication, and 3D gallery views. Created seamless minting and
+              auction flow with custom UI animations.
+            </p>
+          </div>
+          <div class="panel-media">
+            <div class="screenshot"><img src="./firstgen.jpg" /></div>
+          </div>
         </div>
-        <div class="panel-media"><div class="screenshot"><img src="./firstgen.jpg"></div></div>
-      </div>
 
-      <!-- Scrimmage -->
-      <div class="panel scrimmage">
-        <div class="panel-content">
-          <h2 class="company-name">Scrimmage<span class="line"></span></h2>
-          <p class="company-description">Sports betting app with real-time odds, leaderboard gamification, and performance charts. Implemented full-stack data syncing with Firebase and GSAP-driven interactions.</p>
-      
+        <!-- Scrimmage -->
+        <div class="panel scrimmage">
+          <div class="panel-content">
+            <h2 class="company-name">Scrimmage<span class="line"></span></h2>
+            <p class="company-description">
+              Sports betting app with real-time odds, leaderboard gamification,
+              and performance charts. Implemented full-stack data syncing with
+              Firebase and GSAP-driven interactions.
+            </p>
+          </div>
+          <div class="panel-media">
+            <div class="screenshot">
+              <img src="https://picsum.photos/600/400?random=4" />
+            </div>
+          </div>
         </div>
-        <div class="panel-media"><div class="screenshot"><img src="https://picsum.photos/600/400?random=4"></div></div>
+      </div>
+      <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects-showcase">
+      <!-- Foreground wallpaper -->
+      <div class="projects-parallax-layer"></div>
+
+      <div class="projects-header"><h2>Selected Projects</h2></div>
+      <div class="projects-grid">
+        <div class="project-card" data-depth="0.1">
+          <img src="https://picsum.photos/600/400?random=5" />
+          <div class="project-content">
+            <h3>Neon Studio</h3>
+            <p>Immersive React + GSAP portfolio with glowing motion layers.</p>
+          </div>
+        </div>
+        <div class="project-card" data-depth="0.3">
+          <img src="https://picsum.photos/600/400?random=6" />
+          <div class="project-content">
+            <h3>Solar Dashboard</h3>
+            <p>Real-time renewable energy analytics platform with Node.js.</p>
+          </div>
+        </div>
+        <div class="project-card" data-depth="0.2">
+          <img src="https://picsum.photos/600/400?random=7" />
+          <div class="project-content">
+            <h3>MetaCommerce</h3>
+            <p>
+              3D ecommerce prototype built in Three.js with product orbiting.
+            </p>
+          </div>
+        </div>
+        <div class="project-card" data-depth="0.4">
+          <img src="https://picsum.photos/600/400?random=8" />
+          <div class="project-content">
+            <h3>AI Designer</h3>
+            <p>AI-powered image generation tool with creative UI workflows.</p>
+          </div>
+        </div>
+        <!-- Added Project -->
+        <div class="project-card" data-depth="0.25">
+          <img src="https://picsum.photos/600/400?random=9" />
+          <div class="project-content">
+            <h3>Power Moves ET</h3>
+            <p>
+              Fantasy football app with real-time stats, trade recommendations,
+              and player analytics for elite QB performance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- custom image blend transition -->
+    <section class="intro">
+      <div class="header">
+        <h1>Awaken the Scroll</h1>
+      </div>
+    </section>
+
+    <section class="sportlight">
+      <div class="header">
+        <h1>Where Frames Fade Into Fate</h1>
       </div>
 
-    </div>
-    <div class="progress-bar"><div class="progress-bar-fill"></div></div>
-  </section>
+      <div class="spotlight-images">
+        <div class="row">
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+        </div>
+              <div class="row">
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+        </div>
+              <div class="row">
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+        </div>
+              <div class="row">
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+        </div>
+              <div class="row">
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+          <div class="img"></div>
+        </div>
+      </div>
 
-  <!-- Projects Section -->
-<section class="section projects" id="projects-showcase">
-  <!-- Foreground wallpaper -->
-  <div class="projects-parallax-layer"></div>
 
-  <div class="projects-header"><h2>Selected Projects</h2></div>
-  <div class="projects-grid">
-    <div class="project-card" data-depth="0.1"><img src="https://picsum.photos/600/400?random=5"><div class="project-content"><h3>Neon Studio</h3><p>Immersive React + GSAP portfolio with glowing motion layers.</p></div></div>
-    <div class="project-card" data-depth="0.3"><img src="https://picsum.photos/600/400?random=6"><div class="project-content"><h3>Solar Dashboard</h3><p>Real-time renewable energy analytics platform with Node.js.</p></div></div>
-    <div class="project-card" data-depth="0.2"><img src="https://picsum.photos/600/400?random=7"><div class="project-content"><h3>MetaCommerce</h3><p>3D ecommerce prototype built in Three.js with product orbiting.</p></div></div>
-    <div class="project-card" data-depth="0.4"><img src="https://picsum.photos/600/400?random=8"><div class="project-content"><h3>AI Designer</h3><p>AI-powered image generation tool with creative UI workflows.</p></div></div>
-  </div>
-</section>
+      <div class="mask-container">
+        <div class="mask-img">
+
+          <img src="" alt="" />
+        </div>
+        <div class="header">
+          <h1> The Last Frame Hits Hard</h1>
+
+        </div>
 
 
-  <section class="section outro"><div class="container"><h2>Let’s Build Something Legendary.</h2></div></section>
 
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
-  <script type="module">
-    import gsap from "https://esm.sh/gsap";
-    import { ScrollTrigger } from "https://esm.sh/gsap/all";
-    gsap.registerPlugin(ScrollTrigger);
 
-    gsap.to("#robot",{y:"+=20",repeat:-1,yoyo:true,duration:3,ease:"sine.inOut"});
+      </div>
+    </section>
+    <section class="outro">
+      <div class="header">
+        <h1>End of Act One</h1>
+      </div>
+    </section>
 
-    // Bubbly floating tech icons
-    gsap.utils.toArray(".tech-icons img").forEach((icon, i) => {
-      gsap.to(icon, {
-        y: "+=10",
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"
+    ></script>
+    <script type="module">
+      import gsap from "https://esm.sh/gsap";
+      import { ScrollTrigger } from "https://esm.sh/gsap/all";
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to("#robot", {
+        y: "+=20",
         repeat: -1,
         yoyo: true,
-        duration: 2 + i * 0.2,
+        duration: 3,
         ease: "sine.inOut",
       });
-    });
 
-    // Hero border draw
-    const borderTL = gsap.timeline({delay:0.4});
-    borderTL
-      .to(".hero-border .top",{width:"100%",duration:0.6,ease:"power2.out"})
-      .to(".hero-border .right",{height:"100%",duration:0.6,ease:"power2.out"},"<0.1")
-      .to(".hero-border .bottom",{width:"100%",duration:0.6,ease:"power2.out"},"<0.1")
-      .to(".hero-border .left",{height:"100%",duration:0.6,ease:"power2.out"},"<0.1");
+      // Bubbly floating tech icons
+      gsap.utils.toArray(".tech-icons img").forEach((icon, i) => {
+        gsap.to(icon, {
+          y: "+=10",
+          repeat: -1,
+          yoyo: true,
+          duration: 2 + i * 0.2,
+          ease: "sine.inOut",
+        });
+      });
 
-    // Hero BG Parallax
-    gsap.to(".hero-bg-layer", {
-      scale: 1.2,
-      y: "-10vh",
-      opacity: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-      }
-    });
+      // Hero border draw
+      const borderTL = gsap.timeline({ delay: 0.4 });
+      borderTL
+        .to(".hero-border .top", {
+          width: "100%",
+          duration: 0.6,
+          ease: "power2.out",
+        })
+        .to(
+          ".hero-border .right",
+          { height: "100%", duration: 0.6, ease: "power2.out" },
+          "<0.1"
+        )
+        .to(
+          ".hero-border .bottom",
+          { width: "100%", duration: 0.6, ease: "power2.out" },
+          "<0.1"
+        )
+        .to(
+          ".hero-border .left",
+          { height: "100%", duration: 0.6, ease: "power2.out" },
+          "<0.1"
+        );
 
-    gsap.utils.toArray(".hero-side-text span").forEach((el,i)=>{
-      gsap.to(el,{yPercent:-30-(i*10),ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
-    });
+      // Hero BG Parallax
+      gsap.to(".hero-bg-layer", {
+        scale: 1.2,
+        y: "-10vh",
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
 
-    gsap.utils.toArray(".glass-card").forEach((card,i)=>{
-      gsap.from(card,{opacity:0,y:60,scale:0.95,duration:1,delay:i*0.2,ease:"power3.out"});
-      gsap.to(card,{yPercent:-10-(i*5),opacity:1,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
-    });
+      gsap.utils.toArray(".hero-side-text span").forEach((el, i) => {
+        gsap.to(el, {
+          yPercent: -30 - i * 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
 
-    gsap.to("#robot",{scale:0.35,x:"45vw",y:"60vh",scrollTrigger:{trigger:".experience",start:"top bottom",end:"top top",scrub:true}});
+      gsap.utils.toArray(".glass-card").forEach((card, i) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 60,
+          scale: 0.95,
+          duration: 1,
+          delay: i * 0.2,
+          ease: "power3.out",
+        });
+        gsap.to(card, {
+          yPercent: -10 - i * 5,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
 
-    const panels=gsap.utils.toArray(".panel");
-    const progress=document.querySelector(".progress-bar-fill");
-    const scrollTween=gsap.to(panels,{xPercent:-100*(panels.length-1),ease:"none",
-      scrollTrigger:{trigger:".experience",pin:true,scrub:1.2,end:() => "+="+(window.innerWidth*(panels.length-1)),onUpdate:self=>progress.style.width=(self.progress*100)+"%"}});
-    panels.forEach(p=>{
-      const n=p.querySelector(".company-name"),l=p.querySelector(".line"),d=p.querySelector(".company-description"),i=p.querySelector(".screenshot");
-      const tl=gsap.timeline({scrollTrigger:{trigger:p,containerAnimation:scrollTween,start:"left center",end:"right center",scrub:true}});
-      tl.to(n,{opacity:1,y:0,duration:1})
-        .to(l,{width:"100%",duration:.8},"<0.2")
-        .to(d,{opacity:1,y:0,duration:1},"<0.2")
-        .to(i,{opacity:1,scale:1.05,duration:1.2},"<0.3");
-    });
+      gsap.to("#robot", {
+        scale: 0.35,
+        x: "45vw",
+        y: "60vh",
+        scrollTrigger: {
+          trigger: ".experience",
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+        },
+      });
 
-      gsap.to("#robot",{y:"+=20",repeat:-1,yoyo:true,duration:3,ease:"sine.inOut"});
-    gsap.utils.toArray(".tech-icons img").forEach((icon, i) => {
-      gsap.to(icon, {y: "+=10", repeat: -1, yoyo: true, duration: 2 + i * 0.2, ease: "sine.inOut"});
-    });
+      const panels = gsap.utils.toArray(".panel");
+      const progress = document.querySelector(".progress-bar-fill");
+      const scrollTween = gsap.to(panels, {
+        xPercent: -100 * (panels.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".experience",
+          pin: true,
+          scrub: 1.2,
+          end: () => "+=" + window.innerWidth * (panels.length - 1),
+          onUpdate: (self) =>
+            (progress.style.width = self.progress * 100 + "%"),
+        },
+      });
+      panels.forEach((p) => {
+        const n = p.querySelector(".company-name"),
+          l = p.querySelector(".line"),
+          d = p.querySelector(".company-description"),
+          i = p.querySelector(".screenshot");
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: p,
+            containerAnimation: scrollTween,
+            start: "left center",
+            end: "right center",
+            scrub: true,
+          },
+        });
+        tl.to(n, { opacity: 1, y: 0, duration: 1 })
+          .to(l, { width: "100%", duration: 0.8 }, "<0.2")
+          .to(d, { opacity: 1, y: 0, duration: 1 }, "<0.2")
+          .to(i, { opacity: 1, scale: 1.05, duration: 1.2 }, "<0.3");
+      });
 
+      gsap.to("#robot", {
+        scale: 0.4,
+        filter: "drop-shadow(0 0 60px rgba(255,255,200,0.7))",
+        scrollTrigger: {
+          trigger: "#projects-showcase",
+          start: "top bottom",
+          end: "top center",
+          scrub: true,
+        },
+      });
 
-    borderTL.to(".hero-border .top",{width:"100%",duration:0.6,ease:"power2.out"})
-      .to(".hero-border .right",{height:"100%",duration:0.6,ease:"power2.out"},"<0.1")
-      .to(".hero-border .bottom",{width:"100%",duration:0.6,ease:"power2.out"},"<0.1")
-      .to(".hero-border .left",{height:"100%",duration:0.6,ease:"power2.out"},"<0.1");
-
-    gsap.to("#robot",{scale:0.35,x:"45vw",y:"60vh",scrollTrigger:{trigger:".experience",start:"top bottom",end:"top top",scrub:true}});
-
-    gsap.to("#robot",{scale:0.4,filter:"drop-shadow(0 0 60px rgba(255,255,200,0.7))",
-      scrollTrigger:{trigger:"#projects-showcase",start:"top bottom",end:"top center",scrub:true}});
-
-    gsap.utils.toArray(".project-card").forEach(card=>{
-      const depth = card.dataset.depth;
-      gsap.to(card,{y:() => -200 * depth + "px",opacity:1,scale:1,ease:"none",scrollTrigger:{trigger:card,start:"top bottom",end:"top top",scrub:true}});
-    });
-
-
-    
-  </script>
-</body>
+      gsap.utils.toArray(".project-card").forEach((card) => {
+        const depth = card.dataset.depth;
+        gsap.to(card, {
+          y: () => -200 * depth + "px",
+          opacity: 1,
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom",
+            end: "top top",
+            scrub: true,
+          },
+        });
+      });
+    </script>
+  </body>
 </html>
