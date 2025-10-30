@@ -125,10 +125,10 @@
         mix-blend-mode: overlay;
       }
       .hero-side-text span:nth-child(2) {
-        color: rgba(255, 204, 102, 0.15);
+        color: rgba(255, 204, 102,1 );
       }
       .hero-side-text span:nth-child(3) {
-        color: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255,1);
       }
 
       .scatter-text {
@@ -418,53 +418,13 @@ img {
 }
 
 
-.intro-title{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  text-align: center;
-}
-
-
-.outro-title{
-  position: absolute;
-  top: 50%;
-  left: calc(50% + 10rem);
-  transform: translate(-50%, -50%);
-}
-
-
-.tag {
-  position: absolute;
-  width: max-content;
-  color: rgba(255, 255, 255, 0.815) ;
-  overflow: hidden;
-}
-
-
-.tag-1 {
-  top: 15%;
-  left: 15%;
-}
-
-
-.tag-2{
-  bottom: 15%;
-  left: 25%;
-}
-
-.tag-3{
-  bottom: 30%;
-  right: 15%;
-}
 
 
 .container{
   position: relative;
   width: 100%;
   height: 100%;
+  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -542,7 +502,6 @@ clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
 .intro-title .char, .outro-title .char {
   margin-top: 0.75rem;
 }
-
 
 
 .intro-title .char span,  .outro-title .char span, .tag .word {
@@ -636,6 +595,7 @@ clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 3rem;
   padding: 6rem 4rem;
+  width: 100vw;
 }
 
 .project-card {
@@ -732,7 +692,7 @@ clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
         <div class="bottom"></div>
         <div class="left"></div>
       </div>
-      <div class="hero-side-text">
+<div class="hero-side-text" id="heroText">
         <span>Creative</span>
         <span>Designer</span>
         <span>Developer</span>
@@ -850,12 +810,7 @@ clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
               authentication, and 3D gallery views. Created seamless minting and
               auction flow with custom UI animations.
             </p>
-        <div class="tech-icons">
-              <img src="path/to/gsap-logo.svg"     alt="GSAP"        />
-  <img src="path/to/scrolltrigger-logo.svg" alt="ScrollTrigger" />
-  <img src="path/to/threejs-logo.svg"   alt="Three.js"    />
-  <img src="path/to/react-logo.svg"     alt="React"       />
-  </div>
+
           </div>
           <div class="panel-media">
             <div class="screenshot"><img src="./firstgen.jpg" /></div>
@@ -1070,8 +1025,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isMobile = window.innerWidth <= 1000;
 
-  
-
+gsap.to("#heroText", {
+  yPercent: -100,// moves slower (adjust this for more/less effect)
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "bottom bottom",
+    end: "bottom top",
+    scrub: true // makes it smooth & tied to scroll position
+  }
+});
   // ================= HERO SECTION =================
   const borderTL = gsap.timeline({ delay: 0.4 });
   borderTL
@@ -1158,6 +1121,9 @@ const upcomingProjectTL = gsap.timeline({
     }
   }
 });
+
+
+
 
 // Initial fade-in before preloader starts
 upcomingProjectTL
