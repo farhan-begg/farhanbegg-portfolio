@@ -500,10 +500,19 @@ font-size: 0.875rem;
       position: absolute;
       top: 0;
       left: 0;
+      z-index: -20;
       transform: translateY(100%);}
 
 
-      
+      .project-image-wrapper {
+  position: relative;
+  width: 80%;
+  max-width: 1200px;
+  aspect-ratio: 4/5;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
     </style>
   </head>
   <body>
@@ -899,10 +908,10 @@ const upcomingProjectTL = gsap.timeline({
   textSections.forEach((section, i) => {
     if(i === 0) return;
 
-    ScrollTrigger.create({
+   ScrollTrigger.create({
       trigger: section,
       start: "top 80%",
-      end: "top 20%",
+      end: "top 40%",
       scrub: true,
       onUpdate: () => {
         gsap.to(slideImages[i], { yPercent: 0, duration: .7, ease: "ease" });
@@ -917,7 +926,7 @@ const upcomingProjectTL = gsap.timeline({
     const para = section.querySelector('p');
 
     gsap.to(title, {
-      y: -100,
+      y: 0,
       rotationY: 5,
       scrollTrigger: {
         trigger: section,
@@ -928,7 +937,7 @@ const upcomingProjectTL = gsap.timeline({
     });
 
     gsap.to(para, {
-      y: -50,
+      y: -10,
       rotationY: 2,
       scrollTrigger: {
         trigger: section,
