@@ -22,18 +22,6 @@
       }
 
       /* ===== Robot ===== */
-      #robot {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        width: 600px;
-        height: 600px;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9999999999999;
-        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
-        transition: filter 0.5s ease;
-      }
 
       /* ===== HERO SECTION ===== */
       .section.hero {
@@ -398,281 +386,124 @@ img {
 
 
 
+      #robot {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 600px;
+        height: 600px;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999999999999;
+        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
+        transition: filter 0.5s ease;
+      }
 
 
-.preloader, .split-overlay, .tags-overlay {
+
+
+
+
+
+
+
+/* ===== Wide screen adjustments ===== */
+
+
+
+
+    .project-scroll-container {
+      display: flex;
+      width: 100%;
+      position: relative;
+    }
+
+    .project-left-panel {
+      width: 50%;
+      padding-left: 4rem;
+      box-sizing: border-box;
+    }
+
+    .project-text-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+.project-text-section {
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+padding: 2rem 0;
+}
+
+.project-text-section h2 {
+font-size: 3rem;
+margin-bottom: 1rem;
+font-weight: 700;
+}
+
+.project-text-section p {
+font-size: 1.25rem;
+line-height: 1.8;
+margin-bottom: 1rem;
+color: #ccc;
+}
+
+.project-tech {
+margin-top: 1rem;
+}
+
+.project-tech span {
+display: inline-block;
+margin-right: 0.5rem;
+margin-bottom: 0.5rem;
+background: rgba(255,255,255,0.1);
+color: #fff;
+padding: 0.3rem 0.6rem;
+border-radius: 6px;
+font-size: 0.875rem;
+}
+
+ .project-right-panel {
+  width: 50%;
   position: fixed;
-  width: 100vw;
-  height: 100vh;
-}
-
-
-.preloader,
-.tags-overlay {
-  z-index: 2;
-}
-
-
-.split-overlay {
-  z-index: 1;
-}
-
-
-
-
-.container{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  clip-path: polygon(0 48%, 0 45%, 0 52%, 0 52%);
-  z-index: 2;
-}
-
-
-.container .hero-img{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-
-
-nav, footer{
-  position: relative;
-  width: 100vw;
-  padding: 2em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #fff;
-  z-index: 2;
-}
-
-nav p#logo {
-  font-weight: 600;
-  font-size: 20px;
-
-}
-
-
-.card{
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30%;
-  height: 70%;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff00;
-clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-
+  pointer-events: none;
+  z-index: -5;
 }
 
 
-.card h1{
-  text-align: center;
-  width: 100%;
-  font-size: 3rem;
-  color: black;
-}
+    .project-image-wrapper {
+      width: 80%;
+      max-width: 1200px;
+      aspect-ratio: 4/5;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      position: relative;
+    }
+
+    .project-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(100%);}
 
 
-.card .char span{
-  position: relative;
-  display: inline-block;
-  transform: translateY(100%);
-  will-change: transform;
-}
-
-
-.intro-title .char, .outro-title .char, .card .char{
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-}
-
-
-.intro-title .char, .outro-title .char {
-  margin-top: 0.75rem;
-}
-
-
-.intro-title .char span,  .outro-title .char span, .tag .word {
-  position: relative;
-  display: inline-block;
-  transform: translateY(-100%);
-  will-change: transform;
-
-}
-
-.intro-title .first-char{
-  transform-origin: top left;
-}
-
-/* ===== Wide screen adjustments ===== */
-@media (min-width: 1600px) {
-  /* Hero Side Text */
-  .hero-side-text {
-    font-size: 10vw;
-    left: 5%;
-  }
-
-  /* Glass cards */
-  .glass-card {
-    max-width: 700px;
-    padding: 40px;
-  }
-  .glass-card h1 {
-    font-size: 4rem;
-  }
-  .glass-card p {
-    font-size: 1.3rem;
-  }
-
-  /* Experience panels */
-  .panel-content .company-name {
-    font-size: 4rem;
-  }
-  .company-description {
-    font-size: 1.3rem;
-  }
-  .tech-icons img {
-    width: 90px;
-    height: 90px;
-    padding: 16px;
-  }
-
-  .panel-media .screenshot {
-    max-width: 700px;
-  }
-
-  /* Projects Section */
-  .projects-header h2 {
-    font-size: 4rem;
-  }
-  .project-card {
-    transform: translateY(30px) scale(1);
-  }
-  .project-card .project-content h3 {
-    font-size: 1.6rem;
-  }
-  .project-card .project-content p {
-    font-size: 1.1rem;
-  }
-
-  /* Outro */
-  .outro h2 {
-    font-size: 3.5rem;
-  }
-
-  /* Card Section */
-  .card {
-    width: 25%;
-    height: 75%;
-  }
-  .card h1 {
-    font-size: 4rem;
-  }
-
-  /* Preloader / Overlay Titles */
-  .preloader .intro-title h1,
-  .preloader .outro-title h1,
-  .split-overlay .intro-title h1,
-  .split-overlay .outro-title h1 {
-    font-size: 10rem;
-  }
-}
-
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 3rem;
-  padding: 6rem 4rem;
-  width: 100vw;
-}
-
-.project-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 24px;
-  cursor: pointer;
-  margin-top: 50px;
-    min-height: 500px;
-  transition: transform 0.5s ease;
-}
-
-.project-card:hover {
-  transform: scale(1.03);
-}
-
-.project-card img {
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-  object-fit: cover;
-  border-radius: 24px;
-  transition: opacity 0.4s ease;
-}
-
-.project-card:hover img {
-  opacity: 0.8;
-}
-
-.project-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.8));
-  color: #fff;
-  border-radius: 0 0 24px 24px;
-}
-
-.project-info h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-}
-
-.project-info p {
-  font-size: 1rem;
-  opacity: 0.8;
-}
-
-
-
-@media (max-width: 1000px) {
-  h1{
-    font-size: 2.5rem;
-  }
-  .outro-title {
-    left: calc(50% + 4rem)
-  }
-
-  .card {
-    width: 75%;
-  }
-
-  .card h1 {
-    font-size: 2.5rem;
-  }
-
-
-  .intro-title .char, 
-  .outro-title .char {
-    margin-top: 0.5rem;
-  }
-
-
-
-}
+      
     </style>
   </head>
   <body>
@@ -839,175 +670,100 @@ clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
     </section>
 
 
-<div class="preloader">
-  <div class="intro-title">
-    <h1>Nullspace Studio</h1>
+
+<div class="project-scroll-container">
+  <div class="project-left-panel">
+<div class="project-scroll-container">
+  <div class="project-left-panel">
+
+```
+<!-- PowerMoves -->
+<div class="project-text-section" data-image="https://picsum.photos/id/1015/400/500">
+  <h2>PowerMoves</h2>
+  <p>
+    A modern web app that tracks workouts, builds routines, and visualizes progress with interactive charts. Built with React, TailwindCSS, and Firebase for real-time data sync.
+  </p>
+  <div class="project-tech">
+    <span>React</span>
+    <span>TailwindCSS</span>
+    <span>Firebase</span>
+    <span>GSAP</span>
   </div>
-  <div class="outro-title">
-    <h1>10</h1>
-  </div>
-</div>
-
-
-
-<div class="tags-overlay">
-  <div class="tag tag-1"><p>Negative Space</p></div>
-  <div class="tag tag-2"><p>Form & Void</p></div>
-  <div class="tag tag-3"><p>Light Studios</p></div>
-</div>
-
-<div class="container">
-  <nav>
-    <p id="logo">N10</p>
-    <p>Menu</p>
-  </nav>
-
-  <div class="hero-img">
-    <img src="/hero-img.jpg" alt="Hero Image" />
-  </div>
-
-  <div class="card">
-    <h1>Projects</h1>
-  </div>
-
-  <section class="projects">
- <div class="project-card">
-  <div class="project-image">
-    <img src="./images/powermoves-landing.png" alt="Powermoves Project Screenshot" />
-  </div>
-  <div class="project-info">
-    <h2>Powermoves</h2>
-    <p>
-      A full-stack financial automation platform integrating MongoDB, Plaid API,
-      React, Tailwind CSS, Node.js, and Express. Streamlines financial tracking,
-      payments, and analytics for modern users.
-    </p>
-    <div class="project-tech">
-      <span>MongoDB</span>
-      <span>Plaid API</span>
-      <span>React</span>
-      <span>Tailwind CSS</span>
-      <span>Node.js</span>
-      <span>Express</span>
-    </div>
-    <div class="project-links">
-
-          <a 
-        href="https://powermoves.onrender.com//" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="live-link"
-      >
-        🔗 Live Demo
-      </a>
-      <a href="https://github.com/farhan-begg/power_moves_et" target="_blank" rel="noopener noreferrer">
-        GitHub
-      </a>
-    </div>
+  <div class="project-links">
+    <a href="https://github.com/yourusername/powermoves" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/yourusername/" target="_blank">LinkedIn</a>
   </div>
 </div>
 
-    <div class="project-card">
-  <div class="project-image">
-    <img src="./images/mylife.png" alt="MyLife App Screenshot" />
+<!-- Onward Health -->
+<div class="project-text-section" data-image="https://picsum.photos/id/1016/400/500">
+  <h2>Onward Health</h2>
+  <p>
+    A clinician dashboard and radiology AI platform improving workflow efficiency by 45%. Features real-time analytics and DICOM image visualization using React and Python Flask.
+  </p>
+  <div class="project-tech">
+    <span>React</span>
+    <span>Python Flask</span>
+    <span>PostgreSQL</span>
+    <span>Material UI</span>
+  </div>
+  <div class="project-links">
+    <a href="https://github.com/yourusername/onward-health" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/yourusername/" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<!-- First Gen -->
+<div class="project-text-section" data-image="https://picsum.photos/id/1020/400/500">
+  <h2>First Gen (NFT)</h2>
+  <p>
+    NFT marketplace with smart contract integration, wallet authentication, and 3D gallery views. Built smooth minting and auction flows with React and Three.js animations.
+  </p>
+  <div class="project-tech">
+    <span>React</span>
+    <span>Solidity</span>
+    <span>Three.js</span>
+    <span>Web3</span>
+  </div>
+  <div class="project-links">
+    <a href="https://github.com/yourusername/first-gen-nft" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/yourusername/" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<!-- Scrimmage -->
+<div class="project-text-section" data-image="https://picsum.photos/id/1024/400/500">
+  <h2>Scrimmage</h2>
+  <p>
+    Sports betting app with real-time odds, leaderboard gamification, and performance charts. Full-stack data sync implemented with Firebase and GSAP-driven animations.
+  </p>
+  <div class="project-tech">
+    <span>React</span>
+    <span>Firebase</span>
+    <span>GSAP</span>
+    <span>TailwindCSS</span>
+  </div>
+  <div class="project-links">
+    <a href="https://github.com/yourusername/scrimmage" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/yourusername/" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+  </div>
+</div>
+
   </div>
 
-  <div class="project-info">
-    <h2>MyLife</h2>
-    <p>
-      A sleek personal productivity app built with React, Firebase, and Material UI. 
-      MyLife helps users track daily tasks, set goals, and stay organized with real-time syncing.
-    </p>
-
-    <div class="project-tech">
-      <span>React</span>
-      <span>Firebase (Auth & Firestore)</span>
-      <span>Material UI</span>
-    </div>
-
-    <div class="project-links">
-      <a 
-        href="https://my-life-eba96.web.app/" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="live-link"
-      >
-        🔗 Live Demo
-      </a>
-
-      <a 
-        href="https://github.com/farhan-begg/mylife" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="github-link"
-      >
-        🧠 GitHub
-      </a>
+  <div class="project-right-panel">
+    <div class="project-image-wrapper">
+      <img src="/images/login (2).png" alt="Image" class="project-slide-image">
+      <img src="/images/landing.jpg" alt="Image" class="project-slide-image">
+      <img src="https://picsum.photos/id/1020/400/500" alt="Image" class="project-slide-image">
+      <img src="https://picsum.photos/id/1024/400/500" alt="Image" class="project-slide-image">
     </div>
   </div>
 </div>
 
-
-<div class="project-card">
-  <div class="project-image">
-    <img src="./images/landing.jpg" alt="Trilliant Platform Screenshot" />
-  </div>
-
-  <div class="project-info">
-    <h2>Trilliant</h2>
-    <p>
-      Trilliant is a platform for fashion product reviews featuring authentic
-      photos and videos from real shoppers. The goal is to create a more
-      inclusive and sustainable shopping experience by showcasing diverse body
-      types and reducing the environmental impact of returns.
-    </p>
-
-    <div class="project-details">
-      <p><strong>Target Audience:</strong> People tired of being ignored or scammed by online fashion retailers.</p>
-      <p><strong>Product Value:</strong> Helps taller and curvier individuals find clothing that fits their body and budget.</p>
-    </div>
-
-    <div class="project-tech">
-      <span>React</span>
-      <span>Material UI</span>
-    </div>
-
-    <div class="project-links">
-      <a 
-        href="https://trilliant-demo.vercel.app" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="live-link"
-      >
-        🔗 Live Demo
-      </a>
-
-      <a 
-        href="https://github.com/MakeMeSenpai/trilliant-trillionaires" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="github-link"
-      >
-        🧠 GitHub
-      </a>
-    </div>
-  </div>
-</div>
-
-  </section>
-
-  <footer>
-    <p>Scroll Down</p>
-    <p>Made by Codegrid</p>
-  </footer>
-</div>
-
-
-    <section class="outro">
-      <div class="header">
-        <h1>End of Act One</h1>
-      </div>
-    </section>
 
     <script
       type="module"
@@ -1024,6 +780,8 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
 
   const isMobile = window.innerWidth <= 1000;
+
+
 
 gsap.to("#heroText", {
   yPercent: -100,// moves slower (adjust this for more/less effect)
@@ -1076,8 +834,6 @@ gsap.to("#heroText", {
 
 
     // Animate project overlay before scrimmage starts
-
-
   const panels = gsap.utils.toArray(".panel");
   const progress = document.querySelector(".progress-bar-fill");
   const scrollTween = gsap.to(panels, { 
@@ -1091,10 +847,22 @@ gsap.to("#heroText", {
       onUpdate: (self) => { progress.style.width = self.progress * 100 + "%"; } 
     } 
   });
+
+  gsap.to(".scrimmage .parallax", {
+  yPercent: -20, // moves slower than horizontal scroll
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".scrimmage",
+      trigger: ".hero",
+    start: "bottom bottom",
+    end: "bottom top",
+    scrub: true // 
+  }
+});
 // ======= UPCOMING PROJECT OVERLAY =======
 const upcomingProjectTL = gsap.timeline({
   scrollTrigger: {
-    trigger: ".preloader",
+    trigger: ".scrimmage",
     start: "top 90%", // when preloader starts to come in
     end: "bottom top",
     scrub: true,
@@ -1122,9 +890,55 @@ const upcomingProjectTL = gsap.timeline({
   }
 });
 
+  const textSections = document.querySelectorAll('.project-text-section');
+  const slideImages = document.querySelectorAll('.project-slide-image');
 
+  // Show first image initially
+  gsap.set(slideImages[0], { yPercent: 0 });
 
+  textSections.forEach((section, i) => {
+    if(i === 0) return;
 
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 80%",
+      end: "top 20%",
+      scrub: true,
+      onUpdate: () => {
+        gsap.to(slideImages[i], { yPercent: 0, duration: .7, ease: "ease" });
+        gsap.to(slideImages[i-1], { yPercent: -100, duration: .7, ease: "ease" });
+      }
+    });
+  });
+
+  // Floating 3D effect for text
+  textSections.forEach(section => {
+    const title = section.querySelector('h2');
+    const para = section.querySelector('p');
+
+    gsap.to(title, {
+      y: -100,
+      rotationY: 5,
+      scrollTrigger: {
+        trigger: section,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    gsap.to(para, {
+      y: -50,
+      rotationY: 2,
+      scrollTrigger: {
+        trigger: section,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+  });
 // Initial fade-in before preloader starts
 upcomingProjectTL
   .to("#animatedProject", {
@@ -1180,44 +994,8 @@ upcomingProjectTL
     });
   });
 
-  // ================= PRELOADER SECTION (scroll-triggered) =================
 
   
-  ScrollTrigger.create({
-    trigger: " .preloader",
-    once: true,
-    onEnter: () => {
-
-      const preloaderTimeline = gsap.timeline({ defaults: { ease: "hop" } });
-      // Preloader intro/outro animation
-      preloaderTimeline
-        .to(".container", { clipPath: "polygon(0% 48%, 100% 48%, 100% 52%, 0% 52%)", duration: 0.4 }, 4.5);
-
-
-      preloaderTimeline
-        .to(".container", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 0.8 }, 5.5)
-        .to(".container .card", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 0.75 }, 5.7)
-        .to(".container .card h1 .char span", { y: "0%", duration: 0.75, stagger: 0.05 }, 5.9);
-    }
-  });
-
-
-  
-
-  // ================= SPLIT TEXT FUNCTION =================
-  function splitTextElements(selector, type = "words,chars", addFirstChar = false) {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach((el) => {
-      const split = new SplitText(el, { type, wordsClass: "word", charsClass: "char" });
-      if (type.includes("chars")) {
-        split.chars.forEach((char, index) => {
-          const originalText = char.textContent;
-          char.innerHTML = `<span>${originalText}</span>`;
-          if (addFirstChar && index === 0) char.classList.add("first-char");
-        });
-      }
-    });
-  }
 
   
 });
