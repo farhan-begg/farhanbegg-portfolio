@@ -1003,6 +1003,41 @@ upcomingProjectTL
     });
   });
 
+// Background + Text Color Transition (starts right after last pinned image)
+const colorTimeline = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".parallax-section", // start when parallax scene enters
+    start: "top bottom",           // begins when bottom of split image leaves
+    end: "bottom top",             // runs through full parallax scroll
+    scrub: true,
+  }
+});
+
+// Define color stages (you can customize freely)
+colorTimeline.to("body", {
+  backgroundColor: "#0d0d0d", 
+  color: "#ffffff",
+  duration: 1,
+  ease: "none"
+})
+.to("body", {
+  backgroundColor: "#ff6f3c",
+  color: "#fff",
+  duration: 1,
+  ease: "none"
+})
+.to("body", {
+  backgroundColor: "#f0f0f0",
+  color: "#111",
+  duration: 1,
+  ease: "none"
+})
+.to("body", {
+  backgroundColor: "#111",
+  color: "#b7ff72",
+  duration: 1,
+  ease: "none"
+});
 
   
 
