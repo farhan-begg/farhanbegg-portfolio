@@ -9,314 +9,316 @@
       rel="stylesheet"
     />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "PP Neue Montreal", sans-serif;
-        background: #0d0d0d;
-        color: white;
-        overflow-x: hidden;
-      }
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      /* ===== Robot ===== */
+/* ===== HERO SECTION ===== */
+.section.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 2rem;
+  color: white;
+  z-index: 0;
+}
 
-      /* ===== HERO SECTION ===== */
-      .section.hero {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        padding: 2rem;
-        color: white;
-        z-index: 0;
-      }
-      .hero-bg-layer {
-        position: absolute;
-        inset: 0;
-        background: url("bg1.jpg") center/cover no-repeat;
+/* Background layers (only one should be visible at a time) */
+.hero-bg-layer,
+.hero-project-layer {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  z-index: 0;
+  will-change: transform, opacity;
+}
 
-        transform: scale(1.1);
-        z-index: 0;
-        will-change: transform, opacity;
-      }
+.hero-bg-layer {
+  background-image: url("bg1.jpg");
+}
 
-      .hero-project-layer {
-        position: absolute;
-        inset: 0;
-        background: url("bg5.jpg") center/cover no-repeat;
-        filter: blur(10px) brightness(0.6);
-        transform: scale(1.1);
-        z-index: 0;
-        will-change: transform, opacity;
-      }
+.hero-project-layer {
+  background-image: url("bg5.jpg");
+  filter: blur(10px) brightness(0.6);
+}
 
-      /* Animated white border */
-      .hero-border {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-        margin: 50px;
-      }
-      .hero-border div {
-        position: absolute;
-        background: white;
-        opacity: 0.5;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-      }
-      .hero-border .top,
-      .hero-border .bottom {
-        height: 2px;
-        width: 0;
-        left: 0;
-      }
-      .hero-border .left,
-      .hero-border .right {
-        width: 2px;
-        height: 0;
-        top: 0;
-      }
-      .hero-border .top {
-        top: 0;
-      }
-      .hero-border .bottom {
-        bottom: 0;
-      }
-      .hero-border .left {
-        left: 0;
-      }
-      .hero-border .right {
-        right: 0;
-      }
+/* Animated white border */
+.hero-border {
+  position: absolute;
+  inset: 0;
+  margin: 50px;
+  pointer-events: none;
+  z-index: 2; /* raised above bg */
+}
 
-      /* Large Side Text */
-      .hero-side-text {
-        position: absolute;
-        top: 0;
-        left: 3%;
-        height: 100%;
-        font-size: 8vw;
-        font-weight: 800;
-        line-height: 0.9;
-        letter-spacing: -2px;
-        color: rgba(255, 255, 255, 0.06);
-        text-transform: uppercase;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: left;
-        pointer-events: none;
-        mix-blend-mode: overlay;
-      }
-      .hero-side-text span:nth-child(2) {
-        color: rgba(255, 204, 102,1 );
-      }
-      .hero-side-text span:nth-child(3) {
-        color: rgba(255, 255, 255,1);
-      }
+.hero-border div {
+  position: absolute;
+  background: white;
+  opacity: 0.5;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
 
-      .scatter-text {
-        position: relative;
-        z-index: 6;
-        height: 100%;
-        perspective: 1200px;
-      }
-      .glass-card {
-        position: absolute;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-        max-width: 500px;
-        color: white;
-        z-index: 7;
-      }
+.hero-border .top,
+.hero-border .bottom {
+  height: 2px;
+  width: 0;
+  left: 0;
+}
 
-      /* ===== Experience ===== */
-      .section.experience {
-        position: relative;
-        min-height: 100vh;
-        overflow: hidden;
-      }
-      .experience-wrapper {
-        display: flex;
-  width: calc(100vw * 4);
-        height: 100vh;
-        position: relative;
-      }
-      .panel {
-        width: 100vw;
-        flex-shrink: 0;
-        padding: 8rem 5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 6rem;
-        position: relative;
-        overflow: hidden;
-        transition: background 1s ease, color 1s ease;
-      }
-      .panel-content {
-        flex: 1;
-        z-index: 3;
-      }
-      .company-name {
-        font-size: 3rem;
-        font-weight: 700;
-        display: inline-block;
-        opacity: 0;
-        position: relative;
-        margin-bottom: 1.5rem;
-      }
-      .line {
-        position: absolute;
-        bottom: -6px;
-        left: 0;
-        height: 3px;
-        width: 0;
-        background: currentColor;
-        border-radius: 2px;
-      }
-      .company-description {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        opacity: 0;
-        transform: translateY(30px);
-        max-width: 700px;
-      }
+.hero-border .left,
+.hero-border .right {
+  width: 2px;
+  height: 0;
+  top: 0;
+}
 
-      .panel-media {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-      }
-      .screenshot {
-        position: relative;
-        width: 100%;
-   max-width: 1250px; /* bigger than 550px */
-        aspect-ratio: 16/10;
-        border-radius: 20px;
-        overflow: hidden;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-        opacity: 0;
-        transform: scale(0.9);
-        transition: all 1s ease;
-      }
-      .screenshot img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform .2s ease;
-      }
-      .screenshot.active img {
-        transform: scale(.1);
-      }
+.hero-border .top { top: 0; }
+.hero-border .bottom { bottom: 0; }
+.hero-border .left { left: 0; }
+.hero-border .right { right: 0; }
 
-      .panel.johnson {
-        background: #fefefe;
-        color: #111;
-      }
-      .panel.onward {
-        background: linear-gradient(135deg, #ff6f3c, #ff914d);
-        color: #fff;
-      }
-      .panel.firstgen {
-        background: linear-gradient(135deg, #d6cec3, #b8b1a9);
-        color: #111;
-      }
-      .panel.scrimmage {
-        background: linear-gradient(135deg, #0d0d0d, #121212);
-        color: #b7ff72;
-      }
-
-      .progress-bar {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 2px;
-        overflow: hidden;
-        z-index: 10;
-      }
-      .progress-bar-fill {
-        height: 100%;
-        width: 0;
-        background: #ffcc66;
-        transition: width 0.3s ease;
-      }
-
-      /* Tech icons for Johnson (glass bubbly) */
-      .tech-icons img {
-        margin-top: 25px;
-        margin-left: 10px;
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(25px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 12px;
-        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2),
-          0 4px 12px rgba(0, 0, 0, 0.25),
-          inset 0 0 15px rgba(255, 255, 255, 0.755);
-        cursor: pointer;
-        transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
-        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
-      }
-
-      .tech-icons img:hover {
-        transform: scale(1.35) translateY(-10px);
-        filter: drop-shadow(0 0 30px #f0f0f0);
-        box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4),
-          0 8px 20px rgba(0, 0, 0, 0.44),
-          inset 0 0 25px rgba(255, 255, 255, 0.5);
-      }
-
-      /* ===== Projects ===== */
-      .section.projects {
-        position: relative;
-        min-height: 200vh;
-        padding: 6rem 3rem;
-        overflow: hidden;
-      }
-
-      /* Background layer */
-      .section.projects::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("bg5.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        filter: blur(10px) brightness(0.6);
-        z-index: -1; /* behind the content */
-      }
-
-      /* Content inside the section stays normal */
-   .project-card {
+/* Large Side Text */
+.hero-side-text {
+  position: absolute;
+  top: 0;
+  left: 3%;
+  height: 100%;
+  font-size: 8vw;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  color: rgba(255, 255, 255, 0.06);
+  text-transform: uppercase;
+  z-index: 3;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.hero-side-text span:nth-child(2) {
+  color: rgba(255, 204, 102, 1);
+}
+.hero-side-text span:nth-child(3) {
+  color: rgba(255, 255, 255, 1);
+}
+
+.scatter-text {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  perspective: 1200px;
+}
+
+/* ===== GLASS CARDS ===== */
+.glass-cards-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: center;
+  padding: 10vh 0;
+  width: 100%;
+  z-index: 5;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .glass-cards-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .glass-card {
+    max-width: 90%;
+    transform: none !important;
+  }
+}
+
+/* ===== EXPERIENCE ===== */
+.section.experience {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.experience-wrapper {
+  display: flex;
+  width: 400vw; /* simpler */
+  height: 100vh;
+}
+
+.panel {
+  width: 100vw;
+  flex-shrink: 0;
+  padding: 8rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 1s ease, color 1s ease;
+}
+
+.panel-content {
+  flex: 1;
+  z-index: 2;
+}
+
+.company-name {
+  font-size: 3rem;
+  font-weight: 700;
+  display: inline-block;
+  opacity: 0;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.line {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.company-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0;
+  transform: translateY(30px);
+  max-width: 700px;
+}
+
+.panel-media {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.screenshot {
+  width: 100%;
+  max-width: 1250px;
+  aspect-ratio: 16/10;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 1s ease;
+}
+
+.screenshot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .2s ease;
+}
+
+/* Panel themes */
+.panel.johnson { background: #fefefe; color: #111; }
+.panel.onward { background: linear-gradient(135deg, #ff6f3c, #ff914d); color: #fff; }
+.panel.firstgen { background: linear-gradient(135deg, #d6cec3, #b8b1a9); color: #111; }
+.panel.scrimmage { background: linear-gradient(135deg, #0d0d0d, #121212); color: #b7ff72; }
+
+/* Progress Bar */
+.progress-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0;
+  background: #ffcc66;
+  transition: width 0.3s ease;
+}
+
+/* Tech Icons */
+.tech-icons img {
+  margin: 25px 10px 0 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2),
+              0 4px 12px rgba(0, 0, 0, 0.25),
+              inset 0 0 15px rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+}
+
+.tech-icons img:hover {
+  transform: scale(1.35) translateY(-10px);
+  filter: drop-shadow(0 0 30px #f0f0f0);
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4),
+              0 8px 20px rgba(0, 0, 0, 0.44),
+              inset 0 0 25px rgba(255, 255, 255, 0.5);
+}
+
+/* ===== PROJECTS ===== */
+.section.projects {
+  position: relative;
+  min-height: 200vh;
+  padding: 6rem 3rem;
+  overflow: hidden;
+}
+
+.section.projects::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("bg5.jpg") center/cover no-repeat;
+  filter: blur(10px) brightness(0.6);
+  z-index: -1;
+}
+
+.project-card {
+  display: flex;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin-bottom: 2rem;
 }
@@ -353,8 +355,7 @@
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
   font-size: 0.875rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
 }
 
 .project-links a {
@@ -372,36 +373,26 @@
   background: #4338ca;
 }
 
-
-
-      /* new updated */
-      
+/* Global img override (keep only this one) */
 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-
-
-
-
-      #robot {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        width: 600px;
-        height: 600px;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9999999999999;
-        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
-        transition: filter 0.5s ease;
-      }
-
-
-
-
+/* Robot element */
+#robot {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
+  transition: filter 0.5s ease;
+}
 
 
 
@@ -559,17 +550,15 @@ font-size: 0.875rem;
 body {
   background-color: #111;
   font-family: "Open Sans", sans-serif;
-  color: white;
-  overscroll-behavior: none;
-  margin: 0;
-  padding: 0;
-  font-weight: 300;
-  overflow-x: hidden;
-  font-size: var(--step-0);
+
 }
 
 section {
   min-height: 100vh;
+}
+
+.card-1{
+  font-size: 14px;
 }
 
 p {
@@ -586,13 +575,7 @@ p {
   padding: 0 0.5rem;
 }
 
-h1,
-h2,
-h3,
-h4,
-p {
-  margin: 0;
-}
+
 
 .flow--lg > * + * {
   margin-top: 2em;
@@ -607,7 +590,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 50vh;
 }
 
@@ -625,17 +608,13 @@ p {
 }
 
 h1 {
-  font-size: clamp(12px, 8vw, 100px);
+  font-size: clamp(12px, 8vw, 40px);
   text-align: center;
-  line-height: 0.67;
+  line-height: 1;
   margin: 0 auto;
   font-family: "wild_worldbold";
 }
-h1 .eyebrow {
-  font-family: "Open sans", sans-serif;
-  font-size: clamp(12px, 3vw, 40px);
-  font-weight: 400;
-}
+
 
 .headingText p {
   font-family: "wild_worldbold";
@@ -650,6 +629,7 @@ h1 .eyebrow {
   -webkit-text-stroke-color: white;
   z-index: -10;
 }
+
 
 .intro,
 h2,
@@ -682,40 +662,14 @@ h3 {
 
 .image-grid {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 0.2rem;
-  grid-row-gap: 0.2rem;
-  width: 70vw;
+
+  width: 100vw;
   margin: 0 auto;
-  padding-top: 40vh;
+  padding-top: 30vh;
   z-index: -1;
 }
-.image-grid .image_cont {
-  position: relative;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-}
-.image-grid img {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 150%;
-  object-fit: cover;
-}
-.image-grid .image_cont:nth-child(1) {
-  grid-column: 1;
-  grid-row: 1;
-}
-.image-grid .image_cont:nth-child(2) {
-  grid-column: 3;
-  grid-row: 2;
-}
-.image-grid .image_cont:nth-child(3) {
-  grid-column: 2;
-  grid-row: 3;
-}
+
+
 
 .parallax-images {
   margin-top: 10vh;
@@ -844,6 +798,48 @@ h3 {
 .spacer {
   height: 10vh;
 }
+
+.data-visual-section {
+  position: relative;
+  padding: 8rem 5vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.data-text {
+  max-width: 480px;
+  z-index: 10;
+}
+
+.data-text h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.data-text p {
+  opacity: 0.8;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.data-images {
+  position: relative;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.data-img {
+  width: 100%;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0px 8px 30px rgba(0,0,0,0.2);
+}
     </style>
   </head>
   <body>
@@ -863,30 +859,61 @@ h3 {
         <div class="bottom"></div>
         <div class="left"></div>
       </div>
-<div class="hero-side-text" id="heroText">
-        <span>Creative</span>
-        <span>Designer</span>
-        <span>Developer</span>
-      </div>
-      <div class="scatter-text">
-        <div class="glass-card" style="top: 15%; left: 10%">
-          <h1>Hey, I’m Farhan Begg.</h1>
-        </div>
-        <div class="glass-card" style="top: 45%; left: 5%">
-          <p>
-            Frontend & Full-Stack Developer — building immersive digital
-            experiences with design & precision.
-          </p>
-        </div>
-        <div class="glass-card" style="bottom: 10%; right: 10%">
-          <p>
-            React • React Native • GSAP • Three.js • TypeScript • TailwindCSS
-          </p>
-        </div>
+
+      
+   
       </div>
     </section>
 
-    <!-- Experience -->
+  
+
+<div id="smooth-wrapper">
+  <div id="smooth-content">
+
+<section class="image-grid container">
+  <div data-speed="1">
+    <div class="hero-side-text" id="heroText">
+      <span>Creative</span>
+      <span>Designer</span>
+      <span>Developer</span>
+    </div>
+  </div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+  <div class="glass-cards-wrapper">
+    <div class="glass-card card-1">
+      <h1>Hey, I’m Farhan Begg.</h1>
+    </div>
+
+  
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+    <div class="glass-card card-3">
+      <p>React • React Native • GSAP • Three.js • TypeScript • TailwindCSS</p>
+    </div>
+
+    <div class="glass-card card-4">
+      <p>React • React Native • GSAP • Three.js • TypeScript • TailwindCSS</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Experience -->
     <section class="section experience" id="experience">
       <div class="experience-wrapper" id="horizontalScroll">
         <!-- Johnson Health Tech -->
@@ -1010,130 +1037,29 @@ h3 {
     </section>
 
 
-
-<div class="project-scroll-container">
-  <div class="project-left-panel">
-
-```
-<!-- PowerMoves -->
-<div class="project-text-section" data-image="https://picsum.photos/id/1015/400/500">
-  <h2>PowerMoves</h2>
-  <p>
-    A modern web app that tracks workouts, builds routines, and visualizes progress with interactive charts. Built with React, TailwindCSS, and Firebase for real-time data sync.
-  </p>
-  <div class="project-tech">
-    <span>React</span>
-    <span>TailwindCSS</span>
-    <span>Firebase</span>
-    <span>GSAP</span>
-  </div>
-  <div class="project-links">
-    <a href="https://github.com/yourusername/powermoves" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/yourusername/" target="_blank">LinkedIn</a>
-  </div>
-</div>
-
-<!-- Onward Health -->
-<div class="project-text-section" data-image="https://picsum.photos/id/1016/400/500">
-  <h2>Onward Health</h2>
-  <p>
-    A clinician dashboard and radiology AI platform improving workflow efficiency by 45%. Features real-time analytics and DICOM image visualization using React and Python Flask.
-  </p>
-  <div class="project-tech">
-    <span>React</span>
-    <span>Python Flask</span>
-    <span>PostgreSQL</span>
-    <span>Material UI</span>
-  </div>
-  <div class="project-links">
-    <a href="https://github.com/yourusername/onward-health" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/yourusername/" target="_blank">LinkedIn</a>
-  </div>
-</div>
-
-<!-- First Gen -->
-<div class="project-text-section" data-image="https://picsum.photos/id/1020/400/500">
-  <h2>First Gen (NFT)</h2>
-  <p>
-    NFT marketplace with smart contract integration, wallet authentication, and 3D gallery views. Built smooth minting and auction flows with React and Three.js animations.
-  </p>
-  <div class="project-tech">
-    <span>React</span>
-    <span>Solidity</span>
-    <span>Three.js</span>
-    <span>Web3</span>
-  </div>
-  <div class="project-links">
-    <a href="https://github.com/yourusername/first-gen-nft" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/yourusername/" target="_blank">LinkedIn</a>
-  </div>
-</div>
-
-<!-- Scrimmage -->
-<div class="project-text-section" data-image="https://picsum.photos/id/1024/400/500">
-  <h2>Scrimmage</h2>
-  <p>
-    Sports betting app with real-time odds, leaderboard gamification, and performance charts. Full-stack data sync implemented with Firebase and GSAP-driven animations.
-  </p>
-  <div class="project-tech">
-    <span>React</span>
-    <span>Firebase</span>
-    <span>GSAP</span>
-    <span>TailwindCSS</span>
-  </div>
-  <div class="project-links">
-    <a href="https://github.com/yourusername/scrimmage" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/yourusername/" target="_blank">LinkedIn</a>
-  </div>
-</div>
-
-  </div>
-</div>
-
-  </div>
-
-  <div class="project-right-panel">
-    <div class="project-image-wrapper">
-      <img src="/images/login (2).png" alt="Image" class="project-slide-image">
-      <img src="/images/landing.jpg" alt="Image" class="project-slide-image">
-      <img src="https://picsum.photos/id/1020/400/500" alt="Image" class="project-slide-image">
-      <img src="https://picsum.photos/id/1024/400/500" alt="Image" class="project-slide-image">
-    </div>
-  </div>
-</div>
-
-<div id="wrapper">
- <section id="content">
-  <!--  smooth scrolling biz goes in here -->
-  <div class="heading" aria-hidden="true">
-   <p>smooooth</p>
-   <div class="text-container">
-    <p>scrolling</p>
-    <p data-speed="0.95">scrolling</p>
-    <p data-speed="0.9">scrolling</p>
-    <p data-speed="0.85">scrolling</p>
-    <p data-speed="0.8">scrolling</p>
-    <p data-speed="0.75">scrolling</p>
-    <p data-speed="0.7">scrolling</p>
-   </div>
-  </div>
-
-  <section class="image-grid container">
-   <div class="image_cont" data-speed="1">
-    <img data-speed="auto" src="https://images.unsplash.com/photo-1556856425-366d6618905d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG5lb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
-   </div>
-   <div class="image_cont" data-speed="1.7">
-    <img data-speed="auto" src="https://images.unsplash.com/photo-1520271348391-049dd132bb7c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="">
-   </div>
-   <div class="image_cont" data-speed="1.5">
-    <img data-speed="auto" src="https://images.unsplash.com/photo-1609166214994-502d326bafee?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="">
-   </div>
-  </section>
-
   <section class="title container flow--lg">
-   <h1><span class="eyebrow" aria-hidden="true">with </span>GSAP scrollsmoother</h1>
-   <p>Seamlessly integrated with GSAP and ScrollTrigger. Leveraging native scrolling - no "fake" scrollbars or event hijacking.</p>
+   <h1><span class="eyebrow" aria-hidden="true">Passionatie Project</h1>
+Power Move is a passion project that blends creativity and technical precision. I built it to push my limits in advanced motion design and interaction, using GSAP, ScrollTrigger, and native smooth scrolling to craft seamless, immersive experiences. This project highlights my strength in front-end animation, performance optimization, and visual storytelling, showing how thoughtful code can turn simple interactions into dynamic, expressive design.
+
+  <section class="data-visual-section">
+  <div class="data-text">
+    <h2>Visual Data</h2>
+    <p>
+      Instantly track and understand your financial landscape.  
+      See all connected accounts, spending trends, and total net worth  
+      through clean, dynamic data visuals designed for clarity.
+    </p>
+  </div>
+
+  <div class="data-images">
+    <img src="./images/powermoves-landing.png" class="data-img" data-speed="0.8" alt="chart image" />
+    <img src="./images/login (2).png" class="data-img" data-speed="1.2" alt="dashboard image" />
+    <img src='./images/pm.png' class="data-img" data-speed="1.5" alt="analytics image" />
+  </div>
+</section>
   </section>
+
+
 
   <section class="bars container">
 
@@ -1171,7 +1097,7 @@ h3 {
 
   <section class="v-center">
    <div class="parallax-slab">
-    <img data-speed="auto" src="https://assets.codepen.io/756881/smoothscroller-1.jpg" alt="">
+    <img data-speed="auto" src="./bg1.jpg" alt="">
    </div>
   </section>
 
@@ -1200,7 +1126,7 @@ h3 {
    </div>
 
    <div class="image_cont">
-    <img data-speed="auto" src="https://assets.codepen.io/756881/neon3.jpg" alt="">
+    <img data-speed="auto" src="./images/login (2).png" alt="">
    </div>
    <div class="image_cont">
     <img data-speed="auto" src="https://assets.codepen.io/756881/neon2.jpg" alt="">
@@ -1209,6 +1135,7 @@ h3 {
 
   <section class="spacer"></section>
  </section>
+
 </div>
 
 <!-- GSAP core -->
@@ -1221,11 +1148,11 @@ import gsap from "https://cdn.skypack.dev/gsap@3.12.5";
 import { ScrollTrigger } from "https://cdn.skypack.dev/gsap/ScrollTrigger";
 import { CustomEase } from "https://cdn.skypack.dev/gsap/CustomEase";
 import { SplitText } from "https://cdn.skypack.dev/gsap/SplitText";
-
+import { ScrollSmoother } from "https://cdn.skypack.dev/gsap/ScrollSmoother";
 console.log("✅ script.js is loaded and running!");
 
 document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
+  gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText,  ScrollSmoother);
 
   const isMobile = window.innerWidth <= 1000;
 
@@ -1264,10 +1191,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  gsap.utils.toArray(".glass-card").forEach((card, i) => {
-    gsap.from(card, { opacity: 0, y: 60, scale: 0.95, duration: 1, delay: i * 0.2, ease: "power3.out" });
-    gsap.to(card, { yPercent: -10 - i * 5, opacity: 1, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  // ================= GLASS CARD POSITIONING =================
+const glassCards = gsap.utils.toArray(".glass-card");
+
+// Initial placement (acts like your old translateY)
+glassCards.forEach((card, i) => {
+  // vertical offsets to create a layered feel
+  const yOffsets = [-120, -60, 40, 100]; 
+  const scales = [1.05, 1.02, 0.98, 1.0];
+
+  gsap.set(card, {
+    y: yOffsets[i % yOffsets.length],
+    scale: scales[i % scales.length],
+    opacity: 0,
   });
+
+  // Animate in on load
+  gsap.to(card, {
+    opacity: 1,
+    y: yOffsets[i % yOffsets.length] + 20,
+    duration: 1.2,
+    delay: i * 0.2,
+    ease: "power3.out",
+  });
+
+  // Add subtle parallax scroll movement
+  gsap.to(card, {
+    y: yOffsets[i % yOffsets.length] - 30,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+    },
+  });
+});
+
 
   // ================= EXPERIENCE SECTION =================
   gsap.to("#robot", { 
@@ -1314,74 +1275,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .to(i, { opacity: 1, scale: 1.05, duration: 1.2 }, "<0.3");
   });
 
-  // ================= PROJECT SECTION =================
-  const textSections = document.querySelectorAll('.project-text-section');
-  const slideImages = document.querySelectorAll('.project-slide-image');
-  const leftPanel = document.querySelector('.project-left-panel');
-  const rightPanel = document.querySelector('.project-right-panel');
-  const contentSection = document.querySelector('#content');
-
-  // Show first image initially
-  gsap.set(slideImages[0], { yPercent: 0 });
-
-  // Animate images on scroll between text sections
-  textSections.forEach((section, i) => {
-    if(i === 0) return;
-
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top 80%",
-      end: "top 40%",
-      scrub: true,
-      onUpdate: () => {
-        gsap.to(slideImages[i], { yPercent: 0, duration: 0.7, ease: "ease" });
-        gsap.to(slideImages[i-1], { yPercent: -100, duration: 0.7, ease: "ease" });
-      }
-    });
-  });
-
-  // Floating 3D effect for text
-  textSections.forEach(section => {
-    const title = section.querySelector('h2');
-    const para = section.querySelector('p');
-
-    gsap.to(title, {
-      y: 0,
-      rotationY: 5,
-      scrollTrigger: {
-        trigger: section,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true
-      }
-    });
-
-    gsap.to(para, {
-      y: -10,
-      rotationY: 2,
-      scrollTrigger: {
-        trigger: section,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true
-      }
-    });
-  });
-
-  // FADE OUT PROJECT PANELS + IMAGES WHEN #CONTENT STARTS
-  gsap.to([leftPanel, rightPanel], {
-    opacity: 0,
-    y: -50,
-    ease: "power1.out",
-    scrollTrigger: {
-      trigger: contentSection,
-      start: "top bottom",
-      end: "top top",
-      scrub: true
-    }
-  });
-
-
+  
 
 
 
@@ -1401,8 +1295,13 @@ document.addEventListener("DOMContentLoaded", () => {
     .to("body", { backgroundColor: "#f5e8d5", color: "#111111", duration: 1, ease: "none" })
     .to("body", { backgroundColor: "#121212", color: "#b7ff72", duration: 1, ease: "none" });
 
-
-
+// Create the smooth scroller
+let smoother = ScrollSmoother.create({
+  wrapper: "#smooth-wrapper",
+  content: "#smooth-content",
+  smooth: 1, // how long the scrolling takes to catch up (seconds)
+  effects: true // applies "data-speed" and "data-lag" to children
+});
 });
 
 </script>
