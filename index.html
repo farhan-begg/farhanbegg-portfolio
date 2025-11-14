@@ -581,8 +581,8 @@ p {
   margin-top: 2em;
 }
 
-.flow > * + * {
-  margin-top: 1em;
+.flow{
+  margin-bottom: 900px;
 }
 
 .title {
@@ -590,7 +590,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+flex-direction: column;
   min-height: 50vh;
 }
 
@@ -840,6 +840,117 @@ h3 {
   backdrop-filter: blur(12px);
   box-shadow: 0px 8px 30px rgba(0,0,0,0.2);
 }
+
+.heading {
+
+  top: -20vh;
+
+  transform: translateX(0%);
+  opacity: 0;
+}
+
+
+
+.heading p {
+  font-family: "wild_worldbold";
+  font-size: 15.5vw;
+  font-size: clamp(12px, 15.5vw, 150px);
+  text-align: center;
+  line-height: 0.67;
+  margin: 0;
+  text-align: center;
+  color: #111;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: white;
+  z-index: -10;
+}
+
+.intro,
+h2,
+h3 {
+  font-size: var(--step-1);
+  font-weight: 500;
+}
+
+.text-container {
+  position: relative;
+}
+
+.text-container p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  color: transparent;
+}
+
+.text-container p:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  color: white;
+}
+
+on-title {
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fefefe;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+
+
+
+.section-title {
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fefefe;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+
+.section-desc {
+  font-size: clamp(1rem, 1.9vw, 1.2rem);
+  color: #d6d6d6;
+  line-height: 1.65;
+  max-width: 95%;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  align-items: center;
+}
+
+/* 🔥 Clean modern text badges */
+.badge {
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #eaeaea;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+  display: inline-block;
+}
+
+.badge:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+
     </style>
   </head>
   <body>
@@ -1038,27 +1149,60 @@ h3 {
 
 
   <section class="title container flow--lg">
-   <h1><span class="eyebrow" aria-hidden="true">Passionatie Project</h1>
-Power Move is a passion project that blends creativity and technical precision. I built it to push my limits in advanced motion design and interaction, using GSAP, ScrollTrigger, and native smooth scrolling to craft seamless, immersive experiences. This project highlights my strength in front-end animation, performance optimization, and visual storytelling, showing how thoughtful code can turn simple interactions into dynamic, expressive design.
 
-  <section class="data-visual-section">
-  <div class="data-text">
-    <h2>Visual Data</h2>
-    <p>
-      Instantly track and understand your financial landscape.  
-      See all connected accounts, spending trends, and total net worth  
-      through clean, dynamic data visuals designed for clarity.
-    </p>
+      <div class="heading" aria-hidden="true">
+   <p>Passionatie</p>
+   <div class="text-container">
+    <p>Project</p>
+    <p data-speed="0.95">Project</p>
+    <p data-speed="0.9">Project</p>
+    <p data-speed="0.85">Project</p>
+    <p data-speed="0.8">Project</p>
+    <p data-speed="0.75">Project</p>
+    <p data-speed="0.7">Project</p>
+   </div>
   </div>
 
-  <div class="data-images">
-    <img src="./images/powermoves-landing.png" class="data-img" data-speed="0.8" alt="chart image" />
-    <img src="./images/login (2).png" class="data-img" data-speed="1.2" alt="dashboard image" />
-    <img src='./images/pm.png' class="data-img" data-speed="1.5" alt="analytics image" />
-  </div>
-</section>
+  
   </section>
+ <section class="parallax-images container">
+   <div class="parallax-text">
+ <div class="flow content">
+  <h2 class="section-title">Finance Dashboard — Premium Analytics Widgets</h2>
 
+  <p class="section-desc">
+    A high-end financial visualization system featuring glassmorphism UI, precise data 
+    interactions, and production-ready analytics components. This project showcases premium 
+    financial widgets including a gradient-driven Income vs Expense chart and a dynamic 
+    Category Pie with icon-only chips, center KPI ribbons, and animated segmented toggles.
+    <br><br>
+    Designed with TZ-safe date utilities, defensive parsing, and flexible mapping functions, 
+    the dashboard adapts to varied backend payloads without errors. It reflects strong 
+    capabilities in modern frontend engineering, premium UI/UX, advanced data visualization, 
+    and building scalable, reusable financial components.
+  </p>
+
+  <div class="badge-row">
+    <span class="badge">React</span>
+    <span class="badge">Node.js</span>
+    <span class="badge">Express</span>
+    <span class="badge">MongoDB</span>
+    <span class="badge">Redux</span>
+    <span class="badge">Tailwind CSS</span>
+    <span class="badge">Recharts</span>
+    <span class="badge">Framer Motion</span>
+  </div>
+</div>
+
+   </div>
+
+   <div class="image_cont">
+    <img data-speed="auto" src="./images/login (2).png" alt="">
+   </div>
+   <div class="image_cont">
+    <img data-speed="auto" src="https://assets.codepen.io/756881/neon2.jpg" alt="">
+   </div>
+  </section>
 
 
   <section class="bars container">
@@ -1117,21 +1261,7 @@ Power Move is a passion project that blends creativity and technical precision. 
 
   </section>
 
-  <section class="parallax-images container">
-   <div class="parallax-text">
-    <div class="flow content">
-     <h2>Easy parallax image effects</h2>
-     <p>Pop your images in a container with overflow hidden, size them a little larger than the container and set data-speed to auto. GSAP does the rest.</p>
-    </div>
-   </div>
-
-   <div class="image_cont">
-    <img data-speed="auto" src="./images/login (2).png" alt="">
-   </div>
-   <div class="image_cont">
-    <img data-speed="auto" src="https://assets.codepen.io/756881/neon2.jpg" alt="">
-   </div>
-  </section>
+ 
 
   <section class="spacer"></section>
  </section>
@@ -1301,6 +1431,19 @@ let smoother = ScrollSmoother.create({
   content: "#smooth-content",
   smooth: 1, // how long the scrolling takes to catch up (seconds)
   effects: true // applies "data-speed" and "data-lag" to children
+});
+
+gsap.set(".heading", {
+ yPercent: -150,
+ opacity: 1
+});
+// SplitText for staggered h3
+let tl = gsap.timeline();
+let mySplitText = new SplitText("#split-stagger", { type: "words,chars" });
+let chars = mySplitText.chars;
+
+chars.forEach((char, i) => {
+ smoother.effects(char, { speed: 1, lag: (i + 1) * 0.1 });
 });
 });
 
