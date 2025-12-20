@@ -4,1024 +4,47 @@
     <meta charset="UTF-8" />
     <title>GRND Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.cdnfonts.com/css/pp-neue-montreal"
-      rel="stylesheet"
-    />
-    <style>
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* ===== HERO SECTION ===== */
-.section.hero {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  padding: 2rem;
-  color: white;
-  z-index: 0;
-}
-
-/* Background layers (only one should be visible at a time) */
-.hero-bg-layer,
-.hero-project-layer {
-  position: absolute;
-  inset: 0;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  transform: scale(1.1);
-  z-index: 0;
-  will-change: transform, opacity;
-}
-
-.hero-bg-layer {
-  background-image: url("bg1.jpg");
-}
-
-.hero-project-layer {
-  background-image: url("bg5.jpg");
-  filter: blur(10px) brightness(0.6);
-}
-
-/* Animated white border */
-.hero-border {
-  position: absolute;
-  inset: 0;
-  margin: 50px;
-  pointer-events: none;
-  z-index: 2; /* raised above bg */
-}
-
-.hero-border div {
-  position: absolute;
-  background: white;
-  opacity: 0.5;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-}
-
-.hero-border .top,
-.hero-border .bottom {
-  height: 2px;
-  width: 0;
-  left: 0;
-}
-
-.hero-border .left,
-.hero-border .right {
-  width: 2px;
-  height: 0;
-  top: 0;
-}
-
-.hero-border .top { top: 0; }
-.hero-border .bottom { bottom: 0; }
-.hero-border .left { left: 0; }
-.hero-border .right { right: 0; }
-
-/* Large Side Text */
-.hero-side-text {
-  position: absolute;
-  top: 0;
-  left: 3%;
-  height: 100%;
-  font-size: 8vw;
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -2px;
-  color: rgba(255, 255, 255, 0.06);
-  text-transform: uppercase;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-}
-
-.hero-side-text span:nth-child(2) {
-  color: rgba(255, 204, 102, 1);
-}
-.hero-side-text span:nth-child(3) {
-  color: rgba(255, 255, 255, 1);
-}
-
-.scatter-text {
-  position: relative;
-  z-index: 4;
-  height: 100%;
-  perspective: 1200px;
-}
-
-/* ===== GLASS CARDS ===== */
-.glass-cards-wrapper {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(280px, 1fr));
-  gap: 2rem;
-  justify-items: center;
-  align-items: center;
-  padding: 10vh 0;
-  width: 100%;
-  z-index: 5;
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 2rem;
-  color: white;
-  text-align: center;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-
-/* Responsive */
-@media (max-width: 768px) {
-  .glass-cards-wrapper {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .glass-card {
-    max-width: 90%;
-    transform: none !important;
-  }
-}
-
-/* ===== EXPERIENCE ===== */
-.section.experience {
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.experience-wrapper {
-  display: flex;
-  width: 400vw; /* simpler */
-  height: 100vh;
-}
-
-.panel {
-  width: 100vw;
-  flex-shrink: 0;
-  padding: 8rem 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 6rem;
-  position: relative;
-  overflow: hidden;
-  transition: background 1s ease, color 1s ease;
-}
-
-.panel-content {
-  flex: 1;
-  z-index: 2;
-}
-
-.company-name {
-  font-size: 3rem;
-  font-weight: 700;
-  display: inline-block;
-  opacity: 0;
-  position: relative;
-  margin-bottom: 1.5rem;
-}
-
-.line {
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  height: 3px;
-  width: 0;
-  background: currentColor;
-  border-radius: 2px;
-}
-
-.company-description {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  opacity: 0;
-  transform: translateY(30px);
-  max-width: 700px;
-}
-
-.panel-media {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.screenshot {
-  width: 100%;
-  max-width: 1250px;
-  aspect-ratio: 16/10;
-  border-radius: 20px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  transform: scale(0.9);
-  transition: all 1s ease;
-}
-
-.screenshot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .2s ease;
-}
-
-/* Panel themes */
-.panel.johnson { background: #fefefe; color: #111; }
-.panel.onward { background: linear-gradient(135deg, #ff6f3c, #ff914d); color: #fff; }
-.panel.firstgen { background: linear-gradient(135deg, #d6cec3, #b8b1a9); color: #111; }
-.panel.scrimmage { background: linear-gradient(135deg, #0d0d0d, #121212); color: #b7ff72; }
-
-/* Progress Bar */
-.progress-bar {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
-  overflow: hidden;
-  z-index: 10;
-}
-
-.progress-bar-fill {
-  height: 100%;
-  width: 0;
-  background: #ffcc66;
-  transition: width 0.3s ease;
-}
-
-/* Tech Icons */
-.tech-icons img {
-  margin: 25px 10px 0 10px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2),
-              0 4px 12px rgba(0, 0, 0, 0.25),
-              inset 0 0 15px rgba(255, 255, 255, 0.75);
-  cursor: pointer;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
-  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
-}
-
-.tech-icons img:hover {
-  transform: scale(1.35) translateY(-10px);
-  filter: drop-shadow(0 0 30px #f0f0f0);
-  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4),
-              0 8px 20px rgba(0, 0, 0, 0.44),
-              inset 0 0 25px rgba(255, 255, 255, 0.5);
-}
-
-/* ===== PROJECTS ===== */
-.section.projects {
-  position: relative;
-  min-height: 200vh;
-  padding: 6rem 3rem;
-  overflow: hidden;
-}
-
-.section.projects::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("bg5.jpg") center/cover no-repeat;
-  filter: blur(10px) brightness(0.6);
-  z-index: -1;
-}
-
-.project-card {
-  display: flex;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-
-.project-image img {
-  width: 400px;
-  height: auto;
-  object-fit: cover;
-}
-
-.project-info {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.project-info h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-
-.project-info p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 1rem;
-}
-
-.project-tech span {
-  display: inline-block;
-  background: #f3f4f6;
-  color: #111;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  margin: 0 0.5rem 0.5rem 0;
-}
-
-.project-links a {
-  display: inline-block;
-  text-decoration: none;
-  background: #4f46e5;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: background 0.3s;
-}
-
-.project-links a:hover {
-  background: #4338ca;
-}
-
-/* Global img override (keep only this one) */
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Robot element */
-#robot {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 600px;
-  height: 600px;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 9999;
-  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
-  transition: filter 0.5s ease;
-}
-
-
-
-
-
-/* ===== Wide screen adjustments ===== */
-
-
-
-
-    .project-scroll-container {
-      display: flex;
-      width: 100%;
-      position: relative;
-    }
-
-    .project-left-panel {
-      width: 50%;
-      padding-left: 4rem;
-      box-sizing: border-box;
-    }
-
-    .project-text-section {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 2rem;
-      position: relative;
-    }
-
-.project-text-section {
-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-padding: 2rem 0;
-}
-
-.project-text-section h2 {
-font-size: 3rem;
-margin-bottom: 1rem;
-font-weight: 700;
-}
-
-.project-text-section p {
-font-size: 1.25rem;
-line-height: 1.8;
-margin-bottom: 1rem;
-color: #ccc;
-}
-
-.project-tech {
-margin-top: 1rem;
-}
-
-.project-tech span {
-display: inline-block;
-margin-right: 0.5rem;
-margin-bottom: 0.5rem;
-background: rgba(255,255,255,0.1);
-color: #fff;
-padding: 0.3rem 0.6rem;
-border-radius: 6px;
-font-size: 0.875rem;
-}
-
- .project-right-panel {
-  width: 50%;
-  position: fixed;
-  top: 50%;
-  right: 2rem;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-  z-index: -5;
-}
-
-
-    .project-image-wrapper {
-      width: 80%;
-      max-width: 1200px;
-      aspect-ratio: 4/5;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-      position: relative;
-    }
-
-    .project-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -20;
-      transform: translateY(100%);}
-
-
-      .project-image-wrapper {
-  position: relative;
-  width: 80%;
-  max-width: 1200px;
-  aspect-ratio: 4/5;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-}
-
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap");
-@font-face {
-  font-family: "wild_worldbold";
-  src: url("https://assets.codepen.io/756881/wild_world-webfont.woff2") format("woff2"), url("https://assets.codepen.io/756881/wild_world-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-/* @link https://utopia.fyi/type/calculator?c=320,20,1.2,1140,24,1.25,1,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
-:root {
-  --fluid-min-width: 320;
-  --fluid-max-width: 1140;
-  --fluid-screen: 100vw;
-  --fluid-bp: calc(
-   (var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) /
-    (var(--fluid-max-width) - var(--fluid-min-width))
-  );
-}
-
-@media screen and (min-width: 1140px) {
-  :root {
-    --fluid-screen: calc(var(--fluid-max-width) * 1px);
-  }
-}
-:root {
-  --f-0-min: 18;
-  --f-0-max: 20;
-  --step-0: calc(
-   ((var(--f-0-min) / 16) * 1rem) + (var(--f-0-max) - var(--f-0-min)) *
-    var(--fluid-bp)
-  );
-  --f-1-min: 20;
-  --f-1-max: 24;
-  --step-1: calc(
-   ((var(--f-1-min) / 16) * 1rem) + (var(--f-1-max) - var(--f-1-min)) *
-    var(--fluid-bp)
-  );
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #111;
-  font-family: "Open Sans", sans-serif;
-
-}
-
-section {
-  min-height: 100vh;
-}
-
-.card-1{
-  font-size: 14px;
-}
-
-p {
-  line-height: 1.35;
-}
-
-#content {
-  padding: 0 0.75rem;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 0.5rem;
-}
-
-
-
-.flow--lg > * + * {
-  margin-top: 2em;
-}
-
-.flow{
-  margin-bottom: 900px;
-}
-
-.title {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-flex-direction: column;
-  min-height: 50vh;
-}
-
-#content {
-  overflow: visible;
-  width: 100%;
-}
-
-.headingText {
-  position: absolute;
-  top: 50vh;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-}
-
-h1 {
-  font-size: clamp(12px, 8vw, 40px);
-  text-align: center;
-  line-height: 1;
-  margin: 0 auto;
-  font-family: "wild_worldbold";
-}
-
-
-.headingText p {
-  font-family: "wild_worldbold";
-  font-size: 15.5vw;
-  font-size: clamp(12px, 15.5vw, 250px);
-  text-align: center;
-  line-height: 0.67;
-  margin: 0;
-  text-align: center;
-  color: #111;
-  -webkit-text-stroke-width: 1.5px;
-  -webkit-text-stroke-color: white;
-  z-index: -10;
-}
-
-
-.intro,
-h2,
-h3 {
-  font-size: var(--step-1);
-  font-weight: 500;
-}
-
-.text-container {
-  position: relative;
-}
-
-.text-container p {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  color: transparent;
-}
-
-.text-container p:first-child {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  color: white;
-}
-
-.image-grid {
-  position: relative;
-
-  width: 100vw;
-  margin: 0 auto;
-  padding-top: 30vh;
-  z-index: -1;
-}
-
-
-
-.parallax-images {
-  margin-top: 10vh;
-  padding: 10rem 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 1rem;
-  grid-row-gap: 20vh;
-  align-items: center;
-  justify-items: center;
-}
-.parallax-images .image_cont {
-  position: relative;
-  height: 80vh;
-  overflow: hidden;
-}
-.parallax-images img {
-  position: absolute;
-  bottom: 0;
-  margin: 0 auto;
-  height: 140%;
-  width: 100%;
-  object-fit: cover;
-}
-.parallax-images .parallax-text {
-  grid-column: 2;
-  grid-row: 1;
-}
-.parallax-images .image_cont:nth-child(2) {
-  grid-column: 1/span 1;
-  grid-row: 1;
-  width: 100%;
-}
-.parallax-images .image_cont:nth-child(3) {
-  grid-column: 2/span 1;
-  grid-row: 2;
-}
-
-.spacer {
-  min-height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.stagger {
-  font-size: 8vw;
-}
-
-.bars {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 4rem;
-}
-.bars .bars-text {
-  flex: 1 1 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-.bars .bars-cont {
-  flex: 1 1 500px;
-  display: flex;
-  width: 100%;
-  height: 60vh;
-  align-items: flex-end;
-}
-.bars .bar {
-  border-radius: 10px;
-  margin: 2vw;
-  text-align: center;
-  flex: 1 0 auto;
-  font-size: var(--step-0);
-  justify-self: flex-end;
-  font-family: "wild_worldbold";
-  font-size: clamp(16px, 3vw, 36px);
-}
-
-.content {
-  border-left: solid 1px white;
-  padding: 0.5rem 2rem;
-}
-
-.staggered {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  column-gap: 4rem;
-}
-.staggered h3 {
-  font-family: "wild_worldbold";
-  font-size: clamp(16px, 6vw, 80px);
-  letter-spacing: 0.03em;
-}
-.staggered_text {
-  flex: 1 1 300px;
-}
-.staggered_demo {
-  flex: 1 1 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.parallax-slab {
-  position: relative;
-  height: 500px;
-  width: 100%;
-  max-height: 500px;
-  overflow: hidden;
-}
-.parallax-slab img {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 180%;
-  object-fit: cover;
-}
-
-.v-center {
-  display: flex;
-  align-items: center;
-}
-
-.spacer {
-  height: 10vh;
-}
-
-.data-visual-section {
-  position: relative;
-  padding: 8rem 5vw;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4rem;
-}
-
-.data-text {
-  max-width: 480px;
-  z-index: 10;
-}
-
-.data-text h2 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.data-text p {
-  opacity: 0.8;
-  line-height: 1.6;
-  font-size: 1.1rem;
-}
-
-.data-images {
-  position: relative;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.data-img {
-  width: 100%;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0px 8px 30px rgba(0,0,0,0.2);
-}
-
-.heading {
-
-  top: -20vh;
-
-  transform: translateX(0%);
-  opacity: 0;
-}
-
-
-
-.heading p {
-  font-family: "wild_worldbold";
-  font-size: 15.5vw;
-  font-size: clamp(12px, 15.5vw, 150px);
-  text-align: center;
-  line-height: 0.67;
-  margin: 0;
-  text-align: center;
-  color: #111;
-  -webkit-text-stroke-width: 1.5px;
-  -webkit-text-stroke-color: white;
-  z-index: -10;
-}
-
-.intro,
-h2,
-h3 {
-  font-size: var(--step-1);
-  font-weight: 500;
-}
-
-.text-container {
-  position: relative;
-}
-
-.text-container p {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  color: transparent;
-}
-
-.text-container p:first-child {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  color: white;
-}
-
-on-title {
-  font-size: clamp(1.9rem, 3vw, 2.7rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #fefefe;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
-}
-
-
-
-.section-title {
-  font-size: clamp(1.9rem, 3vw, 2.7rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #fefefe;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
-}
-
-.section-desc {
-  font-size: clamp(1rem, 1.9vw, 1.2rem);
-  color: #d6d6d6;
-  line-height: 1.65;
-  max-width: 95%;
-  font-weight: 400;
-  opacity: 0.95;
-}
-
-.badge-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 0.4rem;
-  align-items: center;
-}
-
-/* 🔥 Clean modern text badges */
-.badge {
-  padding: 6px 14px;
-  border-radius: 10px;
-  font-size: 0.85rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #eaeaea;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  backdrop-filter: blur(12px);
-  transition: all 0.25s ease;
-  display: inline-block;
-}
-
-.badge:hover {
-  background: rgba(255, 255, 255, 0.16);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
-
-    </style>
+    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
+
+    <!-- Spline Viewer (load BEFORE using <spline-viewer>) -->
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"
+    ></script>
   </head>
+
   <body>
-    <!-- Robot -->
-    <div id="robot">
-      <spline-viewer
-        url="https://prod.spline.design/9rU3oMRF19yLGMoY/scene.splinecode"
-      ></spline-viewer>
-    </div>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <!-- Robot -->
+        <div id="robot">
+          <spline-viewer
+            url="https://prod.spline.design/9rU3oMRF19yLGMoY/scene.splinecode"
+          ></spline-viewer>
+        </div>
 
-    <!-- HERO -->
-    <section class="section hero">
-      <div class="hero-bg-layer"></div>
-      <div class="hero-border">
-        <div class="top"></div>
-        <div class="right"></div>
-        <div class="bottom"></div>
-        <div class="left"></div>
-      </div>
+        <!-- HERO -->
+        <section class="section hero">
+          <div class="hero-bg-layer"></div>
 
-      
-   
-      </div>
-    </section>
+          <div class="hero-border">
+            <div class="top"></div>
+            <div class="right"></div>
+            <div class="bottom"></div>
+            <div class="left"></div>
+          </div>
 
-  
+          <!-- Keep heroText inside hero -->
+          <div class="hero-side-text" id="heroText">
+            <span>Creative</span>
+            <span>Designer</span>
+            <span>Developer</span>
+          </div>
+        </section>
 
-<div id="smooth-wrapper">
-  <div id="smooth-content">
-
-<section class="image-grid container">
-  <div data-speed="1">
-    <div class="hero-side-text" id="heroText">
-      <span>Creative</span>
-      <span>Designer</span>
-      <span>Developer</span>
-    </div>
-  </div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-
-  <div class="glass-cards-wrapper">
-    <div class="glass-card card-1">
-      <h1>Hey, I’m Farhan Begg.</h1>
-    </div>
-
-  
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div><div></div>
-<div></div>
-    <div class="glass-card card-3">
-      <p>React • React Native • GSAP • Three.js • TypeScript • TailwindCSS</p>
-    </div>
-
-    <div class="glass-card card-4">
-      <p>React • React Native • GSAP • Three.js • TypeScript • TailwindCSS</p>
-    </div>
-  </div>
-</section>
+        <!-- Cards section -->
 
 
   <!-- Experience -->
@@ -1147,24 +170,10 @@ on-title {
       <div class="progress-bar"><div class="progress-bar-fill"></div></div>
     </section>
 
-
-  <section class="title container flow--lg">
-
-      <div class="heading" aria-hidden="true">
-   <p>Passionatie</p>
-   <div class="text-container">
-    <p>Project</p>
-    <p data-speed="0.95">Project</p>
-    <p data-speed="0.9">Project</p>
-    <p data-speed="0.85">Project</p>
-    <p data-speed="0.8">Project</p>
-    <p data-speed="0.75">Project</p>
-    <p data-speed="0.7">Project</p>
-   </div>
-  </div>
+<div class="color-change"></div>
 
   
-  </section>
+
  <section class="parallax-images container">
    <div class="parallax-text">
  <div class="flow content">
@@ -1199,10 +208,214 @@ on-title {
    <div class="image_cont">
     <img data-speed="auto" src="./images/login (2).png" alt="">
    </div>
-   <div class="image_cont">
-    <img data-speed="auto" src="https://assets.codepen.io/756881/neon2.jpg" alt="">
-   </div>
   </section>
+
+<<!-- GRND Horizontal Projects Section (UPDATED: image + modern info cards) -->
+<section class="grnd-hscroll-projects" data-speed="1" id="grnd-hscroll-projects" class="parallax-slab">
+  <!-- Blurred forest background -->
+  <div class="grnd-hscroll-projects__bg" aria-hidden="true"></div>
+  <div class="grnd-hscroll-projects__bgOverlay" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <div class="grnd-hscroll-projects__header container">
+    <h2 class="grnd-hscroll-projects__title">Selected Projects</h2>
+    <p class="grnd-hscroll-projects__subtitle">
+      Scroll down → cards glide horizontally (glass + screenshot + details)
+    </p>
+  </div>
+
+  <!-- Horizontal rail -->
+  <div class="grnd-hscroll-projects__rail" aria-label="Project cards">
+
+    <!-- CARD 1 -->
+    <article class="grnd-hscroll-projects__card">
+      <div class="grnd-hscroll-projects__cardMedia">
+        <img
+          class="grnd-hscroll-projects__cardImg"
+          src="./images/catalog.jpg"
+          alt="Job Dashboard UI screenshot"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="grnd-hscroll-projects__cardMediaOverlay"></div>
+
+        <div class="grnd-hscroll-projects__chipRow">
+          <span class="grnd-hscroll-projects__chip grnd-hscroll-projects__chip--primary">Dashboard</span>
+          <span class="grnd-hscroll-projects__chip">Maps</span>
+          <span class="grnd-hscroll-projects__chip">Routing</span>
+        </div>
+      </div>
+
+      <div class="grnd-hscroll-projects__cardBody">
+        <h3 class="grnd-hscroll-projects__cardTitle">Job Dashboard — Route Optimization</h3>
+        <p class="grnd-hscroll-projects__cardDesc">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ultricies leo integer malesuada nunc vel.
+        </p>
+
+        <div class="grnd-hscroll-projects__metaRow">
+          <div class="grnd-hscroll-projects__meta">
+            <span class="grnd-hscroll-projects__metaLabel">Focus</span>
+            <span class="grnd-hscroll-projects__metaValue">UX + Data Density</span>
+          </div>
+          <div class="grnd-hscroll-projects__meta">
+            <span class="grnd-hscroll-projects__metaLabel">Outcome</span>
+            <span class="grnd-hscroll-projects__metaValue">Faster Dispatch</span>
+          </div>
+        </div>
+
+        <div class="grnd-hscroll-projects__tagRow">
+          <span class="grnd-hscroll-projects__tag">React</span>
+          <span class="grnd-hscroll-projects__tag">Maps</span>
+          <span class="grnd-hscroll-projects__tag">UI Systems</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="grnd-hscroll-projects__card">
+      <div class="grnd-hscroll-projects__cardMedia">
+        <img
+          class="grnd-hscroll-projects__cardImg"
+          src="./images/mylife.png"
+          alt="Dashboard UI preview"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="grnd-hscroll-projects__cardMediaOverlay"></div>
+
+        <div class="grnd-hscroll-projects__chipRow">
+          <span class="grnd-hscroll-projects__chip grnd-hscroll-projects__chip--primary">Analytics</span>
+          <span class="grnd-hscroll-projects__chip">Filtering</span>
+          <span class="grnd-hscroll-projects__chip">Search</span>
+        </div>
+      </div>
+
+      <div class="grnd-hscroll-projects__cardBody">
+        <h3 class="grnd-hscroll-projects__cardTitle">Operations View — Workload & Status</h3>
+        <p class="grnd-hscroll-projects__cardDesc">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+          Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas.
+        </p>
+
+        <div class="grnd-hscroll-projects__metaRow">
+          <div class="grnd-hscroll-projects__meta">
+            <span class="grnd-hscroll-projects__metaLabel">Pattern</span>
+            <span class="grnd-hscroll-projects__metaValue">Card + Table Toggle</span>
+          </div>
+          <div class="grnd-hscroll-projects__meta">
+            <span class="grnd-hscroll-projects__metaLabel">Design</span>
+            <span class="grnd-hscroll-projects__metaValue">Clean + Dense</span>
+          </div>
+        </div>
+
+        <div class="grnd-hscroll-projects__tagRow">
+          <span class="grnd-hscroll-projects__tag">UX</span>
+          <span class="grnd-hscroll-projects__tag">Design System</span>
+          <span class="grnd-hscroll-projects__tag">Performance</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 3 -->
+    <article class="grnd-hscroll-projects__card">
+      <div class="grnd-hscroll-projects__cardMedia">
+        <img
+          class="grnd-hscroll-projects__cardImg"
+          src="./images/powermoves-landing.png"
+          alt="Map and jobs preview"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="grnd-hscroll-projects__cardMediaOverlay"></div>
+
+        <div class="grnd-hscroll-projects__chipRow">
+          <span class="grnd-hscroll-projects__chip grnd-hscroll-projects__chip--primary">Scheduling</span>
+          <span class="grnd-hscroll-projects__chip">Calendar</span>
+          <span class="grnd-hscroll-projects__chip">Pipeline</span>
+        </div>
+      </div>
+
+      <div class="grnd-hscroll-projects__cardBody">
+        <h3 class="grnd-hscroll-projects__cardTitle">Scheduling — Timeline & Prioritization</h3>
+        <p class="grnd-hscroll-projects__cardDesc">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi
+          tristique senectus et netus et malesuada fames ac turpis egestas.
+        </p>
+
+        <div class="grnd-hscroll-projects__metaRow">
+          <div class="grnd-hscroll-projects__meta">
+            <span class="grnd-hscroll-projects__metaLabel">Goal</span>
+            <span class="grnd-hscroll-projects__metaValue">Less Context Switch</span>
+          </div>
+          <div class="grnd-hscroll-projects__meta">
+            <span class="grnd-hscroll-projects__metaLabel">UX</span>
+            <span class="grnd-hscroll-projects__metaValue">One-screen Flow</span>
+          </div>
+        </div>
+
+        <div class="grnd-hscroll-projects__tagRow">
+          <span class="grnd-hscroll-projects__tag">React</span>
+          <span class="grnd-hscroll-projects__tag">State</span>
+          <span class="grnd-hscroll-projects__tag">Accessibility</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 4 -->
+    <article class="grnd-hscroll-projects__card">
+      <div class="grnd-hscroll-projects__cardMedia">
+        <img
+          class="grnd-hscroll-projects__cardImg"
+          src="./images/PLUMBING.png"
+          alt="Job dashboard map preview"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="grnd-hscroll-projects__cardMediaOverlay"></div>
+
+        <div class="grnd-hscroll-projects__chipRow">
+          <span class="grnd-hscroll-projects__chip grnd-hscroll-projects__chip--primary">Admin</span>
+          <span class="grnd-hscroll-projects__chip">Roles</span>
+          <span class="grnd-hscroll-projects__chip">Audit</span>
+        </div>
+      </div>
+
+      <div class="grnd-hscroll-projects__cardBody">
+        <h3 class="grnd-hscroll-projects__cardTitle">Admin Tools — Scale & Control</h3>
+        <p class="grnd-hscroll-projects__cardDesc">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit
+          amet ipsum mauris. Maecenas congue ligula ac quam viverra nec.
+        </p>
+
+        <div class="grnd-hscroll-projects__metaRow">
+          <div class="grnd-hscroll-projects__meta">
+            <span class="grnd-hscroll-projects__metaLabel">Emphasis</span>
+            <span class="grnd-hscroll-projects__metaValue">Consistency</span>
+          </div>
+          <div class="grnd-hscroll-projects__meta">
+            <span class="grnd-hscroll-projects__metaLabel">Build</span>
+            <span class="grnd-hscroll-projects__metaValue">Reusable Blocks</span>
+          </div>
+        </div>
+
+        <div class="grnd-hscroll-projects__tagRow">
+          <span class="grnd-hscroll-projects__tag">UI Kit</span>
+          <span class="grnd-hscroll-projects__tag">Tokens</span>
+          <span class="grnd-hscroll-projects__tag">Scalability</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+  
+
+
+
+
 
 
   <section class="bars container">
@@ -1245,210 +458,20 @@ on-title {
    </div>
   </section>
 
-  <section class="staggered container">
-
-   <div class="staggered_text">
-    <div class="flow content">
-     <h2>Add some lag (the good kind!)</h2>
-     <p>loosen the connection to the scroll to give a feeling of 'follow through.'</p>
-    </div>
-
-   </div>
-
-   <div class="staggered_demo">
-    <h3 id="split-stagger">stagger...</h3>
-   </div>
-
-  </section>
 
  
 
-  <section class="spacer"></section>
- </section>
+
 
 </div>
 
 <!-- GSAP core -->
 
-    <script
+    
+<script type="module" src="./main.js"
+<script
       type="module"
       src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"
-    ></script><script type="module">
-import gsap from "https://cdn.skypack.dev/gsap@3.12.5";
-import { ScrollTrigger } from "https://cdn.skypack.dev/gsap/ScrollTrigger";
-import { CustomEase } from "https://cdn.skypack.dev/gsap/CustomEase";
-import { SplitText } from "https://cdn.skypack.dev/gsap/SplitText";
-import { ScrollSmoother } from "https://cdn.skypack.dev/gsap/ScrollSmoother";
-console.log("✅ script.js is loaded and running!");
-
-document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText,  ScrollSmoother);
-
-  const isMobile = window.innerWidth <= 1000;
-
-  // ================= HERO SECTION =================
-  gsap.to("#heroText", {
-    yPercent: -100,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "bottom bottom",
-      end: "bottom top",
-      scrub: true
-    }
-  });
-
-  const borderTL = gsap.timeline({ delay: 0.4 });
-  borderTL
-    .to(".hero-border .top", { width: "100%", duration: 0.6, ease: "power2.out" })
-    .to(".hero-border .right", { height: "100%", duration: 0.6, ease: "power2.out" }, "<0.1")
-    .to(".hero-border .bottom", { width: "100%", duration: 0.6, ease: "power2.out" }, "<0.1")
-    .to(".hero-border .left", { height: "100%", duration: 0.6, ease: "power2.out" }, "<0.1");
-
-  gsap.to(".hero-bg-layer", { 
-    scale: 1.2, 
-    y: "-10vh", 
-    opacity: 0, 
-    ease: "none", 
-    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } 
-  });
-
-  gsap.utils.toArray(".hero-side-text span").forEach((el, i) => {
-    gsap.to(el, { 
-      yPercent: -30 - i * 10, 
-      ease: "none", 
-      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } 
-    });
-  });
-
-
-  // ================= GLASS CARD POSITIONING =================
-const glassCards = gsap.utils.toArray(".glass-card");
-
-// Initial placement (acts like your old translateY)
-glassCards.forEach((card, i) => {
-  // vertical offsets to create a layered feel
-  const yOffsets = [-120, -60, 40, 100]; 
-  const scales = [1.05, 1.02, 0.98, 1.0];
-
-  gsap.set(card, {
-    y: yOffsets[i % yOffsets.length],
-    scale: scales[i % scales.length],
-    opacity: 0,
-  });
-
-  // Animate in on load
-  gsap.to(card, {
-    opacity: 1,
-    y: yOffsets[i % yOffsets.length] + 20,
-    duration: 1.2,
-    delay: i * 0.2,
-    ease: "power3.out",
-  });
-
-  // Add subtle parallax scroll movement
-  gsap.to(card, {
-    y: yOffsets[i % yOffsets.length] - 30,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true,
-    },
-  });
-});
-
-
-  // ================= EXPERIENCE SECTION =================
-  gsap.to("#robot", { 
-    scale: 0.35, 
-    x: "45vw", 
-    y: "30vh",
-    scrollTrigger: { trigger: ".experience", start: "top bottom", end: "top top", scrub: true } 
-  });
-
-  // Horizontal scroll for panels
-  const panels = gsap.utils.toArray(".panel");
-  const progress = document.querySelector(".progress-bar-fill");
-  const scrollTween = gsap.to(panels, { 
-    xPercent: -100 * (panels.length - 1), 
-    ease: "none", 
-    scrollTrigger: { 
-      trigger: ".experience", 
-      pin: true, 
-      scrub: 1.2, 
-      end: () => "+=" + window.innerWidth * (panels.length - 1), 
-      onUpdate: (self) => { progress.style.width = self.progress * 100 + "%"; } 
-    } 
-  });
-
-  panels.forEach((p) => {
-    const n = p.querySelector(".company-name"),
-          l = p.querySelector(".line"),
-          d = p.querySelector(".company-description"),
-          i = p.querySelector(".screenshot");
-
-    const tl = gsap.timeline({ 
-      scrollTrigger: { 
-        trigger: p, 
-        containerAnimation: scrollTween, 
-        start: "left center", 
-        end: "right center", 
-        scrub: true 
-      } 
-    });
-
-    tl.to(n, { opacity: 1, y: 0, duration: 1 })
-      .to(l, { width: "100%", duration: 0.8 }, "<0.2")
-      .to(d, { opacity: 1, y: 0, duration: 1 }, "<0.2")
-      .to(i, { opacity: 1, scale: 1.05, duration: 1.2 }, "<0.3");
-  });
-
-  
-
-
-
-  // ================= BACKGROUND + TEXT COLOR TRANSITION =================
-  const colorTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".parallax-section",
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true
-    }
-  });
-
-  colorTimeline
-    .to("body", { backgroundColor: "#0d0d0d", color: "#ffffff", duration: 1, ease: "none" })
-    .to("body", { backgroundColor: "#3e2a1a", color: "#ffffff", duration: 1, ease: "none" })
-    .to("body", { backgroundColor: "#f5e8d5", color: "#111111", duration: 1, ease: "none" })
-    .to("body", { backgroundColor: "#121212", color: "#b7ff72", duration: 1, ease: "none" });
-
-// Create the smooth scroller
-let smoother = ScrollSmoother.create({
-  wrapper: "#smooth-wrapper",
-  content: "#smooth-content",
-  smooth: 1, // how long the scrolling takes to catch up (seconds)
-  effects: true // applies "data-speed" and "data-lag" to children
-});
-
-gsap.set(".heading", {
- yPercent: -150,
- opacity: 1
-});
-// SplitText for staggered h3
-let tl = gsap.timeline();
-let mySplitText = new SplitText("#split-stagger", { type: "words,chars" });
-let chars = mySplitText.chars;
-
-chars.forEach((char, i) => {
- smoother.effects(char, { speed: 1, lag: (i + 1) * 0.1 });
-});
-});
-
-</script>
-
-
+    ></script>
   </body>
 </html>
