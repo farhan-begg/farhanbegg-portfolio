@@ -1,4 +1,6 @@
 /* RESET */
+
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -151,7 +153,7 @@
 .section.experience {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
+   contain: layout paint; 
 }
 
 .experience-wrapper {
@@ -439,13 +441,7 @@ font-size: 0.875rem;
   box-shadow: 0 20px 60px rgba(0,0,0,0.7);
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap");
-@font-face {
-  font-family: "wild_worldbold";
-  src: url("https://assets.codepen.io/756881/wild_world-webfont.woff2") format("woff2"), url("https://assets.codepen.io/756881/wild_world-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
 /* @link https://utopia.fyi/type/calculator?c=320,20,1.2,1140,24,1.25,1,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
 :root {
   --fluid-min-width: 320;
@@ -483,7 +479,7 @@ font-size: 0.875rem;
 
 body {
 
-  font-family: "Open Sans", sans-serif;
+  font-family: "Oxanium", sans-serif;
 
 }
 
@@ -720,21 +716,14 @@ h3 {
 .v-center {
   display: flex;
   align-items: center;
+  z-index: 99999999;
 }
 
 .spacer {
   height: 10vh;
 }
 
-.data-visual-section {
-  position: relative;
-  padding: 8rem 5vw;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4rem;
-}
+
 
 .data-text {
   max-width: 480px;
@@ -745,35 +734,6 @@ h3 {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-}
-
-.data-text p {
-  opacity: 0.8;
-  line-height: 1.6;
-  font-size: 1.1rem;
-}
-
-.data-images {
-  position: relative;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.data-img {
-  width: 100%;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0px 8px 30px rgba(0,0,0,0.2);
-}
-
-.heading {
-
-  top: -20vh;
-
-  transform: translateX(0%);
-  opacity: 0;
 }
 
 
@@ -1100,6 +1060,7 @@ margin-left: 800px;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.12);
   color: rgba(255,255,255,0.86);
+  position: relative;
 }
 
 /* Mobile */
@@ -1107,4 +1068,62 @@ margin-left: 800px;
   .grnd-hscroll-projects__rail { padding: 0 5vw; }
   .grnd-hscroll-projects__card { grid-template-rows: 210px 1fr; }
   .grnd-hscroll-projects__metaRow { grid-template-columns: 1fr; }
+}
+
+/* ===============================
+   GRND Glass Links
+================================ */
+
+.grnd-glass-links {
+  position: absolute;
+  bottom: 50vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1.25rem;
+
+
+}
+
+.grnd-glass-link {
+  padding: 0.85rem 1.4rem;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.08); /* glass feel without blur */
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.grnd-glass-link:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Primary CTA (Resume) */
+.grnd-glass-link--primary {
+  background: rgba(183, 255, 114, 0.18);
+  color: #b7ff72;
+  border-color: rgba(183, 255, 114, 0.55);
+}
+
+.grnd-glass-link--primary:hover {
+  background: rgba(183, 255, 114, 0.28);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .grnd-glass-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    bottom: 5vh;
+    gap: 0.75rem;
+  }
 }

@@ -1,10 +1,12 @@
+// main.js (UPDATED: smoother GRND entry + cleaner refresh flow)
+
 import gsap from "https://cdn.skypack.dev/gsap@3.12.5";
 import { ScrollTrigger } from "https://cdn.skypack.dev/gsap/ScrollTrigger";
 import { CustomEase } from "https://cdn.skypack.dev/gsap/CustomEase";
 import { SplitText } from "https://cdn.skypack.dev/gsap/SplitText";
 import { ScrollSmoother } from "https://cdn.skypack.dev/gsap/ScrollSmoother";
 
-console.log("✅ script.js is loaded and running!");
+console.log("✅ main.js is loaded and running!");
 
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText, ScrollSmoother);
@@ -12,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isMobile = window.innerWidth <= 1000;
 
-  // ✅ Create ScrollSmoother ONCE (you had it twice / too late before)
+  // ✅ Create ScrollSmoother ONCE
   const smoother = ScrollSmoother.create({
     wrapper: "#smooth-wrapper",
     content: "#smooth-content",
@@ -23,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ================= HERO SECTION =================
-  // ✅ Use one timeline to avoid fighting triggers/jank
   const heroTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".hero",
@@ -32,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
       scrub: 0.9,
       fastScrollEnd: true,
       preventOverlaps: true,
-      // markers: true,
     },
   });
 
@@ -50,9 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .to(".hero-border .bottom", { width: "100%", duration: 0.6, ease: "power2.out" }, "<0.08")
     .to(".hero-border .left", { height: "100%", duration: 0.6, ease: "power2.out" }, "<0.08");
 
-  // ================= REMOVE GLASS CARDS =================
-  // ✅ You said remove them for now — so this is gone.
-
   // ================= EXPERIENCE SECTION =================
   gsap.to("#robot", {
     scale: 0.35,
@@ -69,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   });
 
-  // Horizontal scroll for panels
   const panels = gsap.utils.toArray(".panel");
   const progress = document.querySelector(".progress-bar-fill");
 
@@ -82,6 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
         pin: true,
         scrub: 1.1,
         anticipatePin: 1,
+        // ✅ helps reduce the "twitch" at the start of pinning
+        pinSpacing: true,
         end: () => "+=" + window.innerWidth * (panels.length - 1),
         onUpdate: (self) => {
           if (progress) progress.style.width = self.progress * 100 + "%";
@@ -94,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const l = p.querySelector(".line");
       const d = p.querySelector(".company-description");
       const img = p.querySelector(".screenshot");
-
       if (!n || !l || !d || !img) return;
 
       gsap.timeline({
@@ -114,59 +111,111 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ================= NEW: GRND HORIZONTAL PROJECTS =================
-  // Requires:
-  //  - section id="grnd-hscroll-projects"
-  //  - div class="grnd-hscroll-projects__rail"
-  //  - cards class="grnd-hscroll-projects__card"
-  const projSection = document.querySelector("#grnd-hscroll-projects");
-  const projRail = projSection?.querySelector(".grnd-hscroll-projects__rail");
-  const projCards = projSection
-    ? gsap.utils.toArray("#grnd-hscroll-projects .grnd-hscroll-projects__card")
-    : [];
+  // ================= GRND: CINEMATIC ENTER + HORIZONTAL PROJECTS =================
+  (function initGRNDProjectsShowcase() {
+    const section = document.querySelector("#grnd-hscroll-projects");
+    if (!section) return;
 
-  if (projSection && projRail && projCards.length) {
-    const getDistance = () => Math.max(0, projRail.scrollWidth - window.innerWidth);
+    const bg = section.querySelector(".grnd-hscroll-projects__bg");
+    const overlay = section.querySelector(".grnd-hscroll-projects__bgOverlay");
+    const header = section.querySelector(".grnd-hscroll-projects__header");
+    const rail = section.querySelector(".grnd-hscroll-projects__rail");
+    const cards = gsap.utils.toArray("#grnd-hscroll-projects .grnd-hscroll-projects__card");
 
-    gsap.set(projCards, { opacity: 0.85, scale: 0.98 });
+    if (!rail || !cards.length) return;
 
-    const railTween = gsap.to(projRail, {
+    // --- Entry reveal (before pin)
+    gsap.set([header, ...cards], { willChange: "transform,opacity" });
+    if (header) gsap.set(header, { autoAlpha: 0, y: 24 });
+    gsap.set(cards, { autoAlpha: 0, y: 24, scale: 0.98 });
+    if (bg) gsap.set(bg, { autoAlpha: 0, scale: 1.06 });
+    if (overlay) gsap.set(overlay, { autoAlpha: 0 });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        end: "top 40%",
+        scrub: 0.9,
+        fastScrollEnd: true,
+      },
+    })
+      .to(bg, { autoAlpha: 1, scale: 1, ease: "none" }, 0)
+      .to(overlay, { autoAlpha: 1, ease: "none" }, 0)
+      .to(header, { autoAlpha: 1, y: 0, ease: "none" }, 0.05)
+      .to(cards, { autoAlpha: 1, y: 0, scale: 1, stagger: 0.08, ease: "none" }, 0.1);
+
+    // --- Horizontal pin scroll
+    const getDistance = () => Math.max(0, rail.scrollWidth - window.innerWidth);
+
+    // pre-set for smoother transforms
+    gsap.set(rail, { willChange: "transform", transform: "translate3d(0,0,0)" });
+    gsap.set(cards, { autoAlpha: 0.8, scale: 0.985 });
+
+    const railTween = gsap.to(rail, {
       x: () => -getDistance(),
       ease: "none",
       scrollTrigger: {
-        trigger: projSection,
+        trigger: section,
         start: "top top",
         end: () => "+=" + getDistance(),
-        scrub: 1,
         pin: true,
-        anticipatePin: 1,
+        scrub: 1.35, // ✅ smoother feel than 1
+        anticipatePin: 1.2,
         invalidateOnRefresh: true,
         fastScrollEnd: true,
+        // ✅ helps in ScrollSmoother layouts
+        pinType: document.querySelector("#smooth-wrapper") ? "transform" : "fixed",
         snap: {
           snapTo: (value) => {
-            const snaps = projCards.length - 1;
+            const snaps = cards.length - 1;
             return snaps > 0 ? Math.round(value * snaps) / snaps : value;
           },
-          duration: 0.35,
+          duration: 0.45,
           ease: "power2.out",
         },
       },
     });
 
-    projCards.forEach((card) => {
+    // --- Center-focus effect (premium, not “blended”)
+    cards.forEach((card) => {
       gsap.to(card, {
-        opacity: 1,
-        scale: 1,
+        autoAlpha: 1,
+        scale: 1.02,
         scrollTrigger: {
           trigger: card,
           containerAnimation: railTween,
-          start: "left center",
-          end: "right center",
+          start: "left 60%",
+          end: "right 40%",
+          scrub: true,
+        },
+      });
+
+      gsap.to(card, {
+        autoAlpha: 0.75,
+        scale: 0.985,
+        scrollTrigger: {
+          trigger: card,
+          containerAnimation: railTween,
+          start: "left 95%",
+          end: "left 60%",
+          scrub: true,
+        },
+      });
+
+      gsap.to(card, {
+        autoAlpha: 0.75,
+        scale: 0.985,
+        scrollTrigger: {
+          trigger: card,
+          containerAnimation: railTween,
+          start: "right 40%",
+          end: "right 5%",
           scrub: true,
         },
       });
     });
-  }
+  })();
 
   // ================= BACKGROUND + TEXT COLOR TRANSITION =================
   gsap.timeline({
@@ -194,6 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ Important with ScrollSmoother
-  ScrollTrigger.refresh();
+  // ✅ refresh after layout settles (helps reduce pin jumps)
+  requestAnimationFrame(() => ScrollTrigger.refresh());
+  setTimeout(() => ScrollTrigger.refresh(), 250);
 });
