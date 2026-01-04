@@ -441,47 +441,17 @@ font-size: 0.875rem;
   box-shadow: 0 20px 60px rgba(0,0,0,0.7);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
-/* @link https://utopia.fyi/type/calculator?c=320,20,1.2,1140,24,1.25,1,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
-:root {
-  --fluid-min-width: 320;
-  --fluid-max-width: 1140;
-  --fluid-screen: 100vw;
-  --fluid-bp: calc(
-   (var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) /
-    (var(--fluid-max-width) - var(--fluid-min-width))
-  );
-}
 
-@media screen and (min-width: 1140px) {
-  :root {
-    --fluid-screen: calc(var(--fluid-max-width) * 1px);
-  }
-}
-:root {
-  --f-0-min: 18;
-  --f-0-max: 20;
-  --step-0: calc(
-   ((var(--f-0-min) / 16) * 1rem) + (var(--f-0-max) - var(--f-0-min)) *
-    var(--fluid-bp)
-  );
-  --f-1-min: 20;
-  --f-1-max: 24;
-  --step-1: calc(
-   ((var(--f-1-min) / 16) * 1rem) + (var(--f-1-max) - var(--f-1-min)) *
-    var(--fluid-bp)
-  );
-}
 
 * {
   box-sizing: border-box;
 }
 
-body {
-
-  font-family: "Oxanium", sans-serif;
+body{
+  font-family: "PP Neue Montreal", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
 }
+
 
 section {
   min-height: 100vh;
@@ -540,12 +510,12 @@ h1 {
   text-align: center;
   line-height: 1;
   margin: 0 auto;
-  font-family: "wild_worldbold";
+
 }
 
 
 .headingText p {
-  font-family: "wild_worldbold";
+
   font-size: 15.5vw;
   font-size: clamp(12px, 15.5vw, 250px);
   text-align: center;
@@ -668,7 +638,7 @@ h3 {
   flex: 1 0 auto;
   font-size: var(--step-0);
   justify-self: flex-end;
-  font-family: "wild_worldbold";
+
   font-size: clamp(16px, 3vw, 36px);
 }
 
@@ -684,7 +654,7 @@ h3 {
   column-gap: 4rem;
 }
 .staggered h3 {
-  font-family: "wild_worldbold";
+
   font-size: clamp(16px, 6vw, 80px);
   letter-spacing: 0.03em;
 }
@@ -739,7 +709,7 @@ h3 {
 
 
 .heading p {
-  font-family: "wild_worldbold";
+
   font-size: 15.5vw;
   font-size: clamp(12px, 15.5vw, 150px);
   text-align: center;
@@ -1087,7 +1057,7 @@ margin-left: 800px;
 
 .grnd-glass-link {
   padding: 0.85rem 1.4rem;
-  font-family: "PP Neue Montreal", sans-serif;
+
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -1125,5 +1095,240 @@ margin-left: 800px;
     justify-content: center;
     bottom: 5vh;
     gap: 0.75rem;
+  }
+}
+
+
+/* ===== Glass Social Header ===== */
+.glass-nav{
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 9999;
+
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.glass-btn{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.20);
+
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+  text-decoration: none;
+}
+
+.glass-btn svg{
+  width: 20px;
+  height: 20px;
+  fill: rgba(255,255,255,0.92);
+}
+
+.glass-btn:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.26);
+}
+
+.glass-btn:active{
+  transform: translateY(0px) scale(0.98);
+}
+
+.glass-btn:focus-visible{
+  outline: 2px solid rgba(255,255,255,0.75);
+  outline-offset: 4px;
+}
+
+@media (max-width: 520px){
+  .glass-nav{
+    top: 14px;
+    right: 14px;
+    gap: 10px;
+    padding: 8px;
+  }
+  .glass-btn{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ===== Hero Cards Wrapper ===== */
+.hero-cards{
+  position: fixed;
+  top: 120px;          /* aligns under the social pill */
+  right: 52px;
+  z-index: 9998;
+  font-weight: 300;
+  width: min(460px, calc(100vw - 44px));
+  display: grid;
+  gap: 50px;
+}
+
+/* ===== Base Glass Card ===== */
+.hero-card{
+  --x: 0px; /* horizontal offset per card */
+
+  position: relative;
+  overflow: hidden;
+
+  padding: 14px 14px 12px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 14px 40px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+
+  transform: translate3d(var(--x), 0, 0);
+  will-change: transform;
+}
+
+/* ===== Subtle Glass Shine ===== */
+.hero-card::before{
+  content:"";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  background: radial-gradient(
+    600px 220px at 18% 0%,
+    rgba(255,255,255,0.18),
+    transparent 55%
+  );
+
+  opacity: .85;
+  mix-blend-mode: screen;
+}
+
+/* ===== Floating / Parallax-ish Layers (with offsets) ===== */
+.hero-card--intro{
+  --x: -22px;
+  animation: floatA 7.2s ease-in-out infinite;
+}
+
+.hero-card--exp{
+  --x: 6px;
+  animation: floatB 8.1s ease-in-out infinite;
+}
+
+.hero-card--now{
+  --x: -18px;
+  animation: floatC 9s ease-in-out infinite;
+}
+
+@keyframes floatA{
+  0%,100%{ transform: translate3d(var(--x), 0px, 0); }
+  50%    { transform: translate3d(var(--x), 10px, 0); }
+}
+
+@keyframes floatB{
+  0%,100%{ transform: translate3d(var(--x), 0px, 0); }
+  50%    { transform: translate3d(var(--x), 14px, 0); }
+}
+
+@keyframes floatC{
+  0%,100%{ transform: translate3d(var(--x), 0px, 0); }
+  50%    { transform: translate3d(var(--x), 18px, 0); }
+}
+
+/* ===== Typography ===== */
+.hero-card__kicker{
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+}
+
+.hero-card__title{
+  margin: 0 0 6px;
+  font-size: 22px;
+  line-height: 1.1;
+  color: rgba(255,255,255,0.96);
+}
+
+.hero-card__headline{
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.92);
+}
+
+.hero-card__sub{
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.86);
+}
+
+/* ===== Stack Pills ===== */
+.hero-card__stack{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.stack-pill{
+  padding: 7px 11px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.16);
+
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.90);
+  white-space: nowrap;
+
+  transition: transform .15s ease, background .15s ease;
+}
+
+.stack-pill:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.16);
+}
+
+.stack-pill--learning{
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 520px){
+  .hero-cards{
+    top: 76px;
+    right: 14px;
+    width: calc(100vw - 28px);
+  }
+
+  .hero-card{
+    --x: 0px; /* remove horizontal offset on mobile */
   }
 }
