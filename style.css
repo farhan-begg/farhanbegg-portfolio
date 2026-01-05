@@ -81,7 +81,9 @@
   top: 0;
   left: 3%;
   height: 100%;
-  font-size: 8vw;
+ font-size: clamp(32px, 8vw, 96px);
+
+  
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -2px;
